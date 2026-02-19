@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>40 Preguntas · MME Tema 5 · Conectores y Cableado</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:#f8f9fa;color:#222;line-height:1.6;}
+
+    /* ─ Screen header ─ */
+    .screen-header{background:linear-gradient(135deg,#0a1a6a,#1a3aaa);color:#fff;padding:1.5rem 2rem;text-align:center;}
+    .screen-header h1{font-size:1.6rem;font-weight:900;margin-bottom:0.3rem;}
+    .screen-header p{font-size:0.95rem;opacity:0.85;}
+    .badge{display:inline-block;background:#ffd700;color:#000;font-weight:800;font-size:0.8rem;padding:0.2rem 0.7rem;border-radius:20px;margin-bottom:0.7rem;}
+    .print-btn{margin-top:1rem;background:#ffd700;color:#000;border:none;padding:0.6rem 1.5rem;border-radius:20px;font-weight:800;font-size:0.95rem;cursor:pointer;transition:all 0.2s;}
+    .print-btn:hover{transform:scale(1.05);}
+
+    /* ─ Main layout ─ */
+    main{max-width:900px;margin:0 auto;padding:2rem 1.5rem;}
+    .section-title{font-size:1.1rem;font-weight:800;color:#0a1a6a;border-left:4px solid #ffd700;padding-left:0.7rem;margin:2rem 0 1rem;}
+
+    /* ─ Question card ─ */
+    .question{background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:1rem;page-break-inside:avoid;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+    .question.game-q{border-left:4px solid #ffd700;}
+    .question.extra-q{border-left:4px solid #1a3aaa;}
+    .q-header{display:flex;align-items:center;gap:0.6rem;margin-bottom:0.6rem;}
+    .q-num{background:#0a1a6a;color:#fff;font-weight:900;font-size:0.78rem;padding:0.2rem 0.6rem;border-radius:20px;white-space:nowrap;}
+    .q-tag{font-size:0.72rem;color:#888;font-style:italic;}
+    .q-image{max-width:280px;max-height:170px;border-radius:8px;margin:0.5rem 0 0.7rem;border:1px solid #ddd;object-fit:contain;display:block;}
+    .q-text{font-weight:600;font-size:0.97rem;margin-bottom:0.7rem;color:#111;}
+    .options{display:grid;grid-template-columns:1fr 1fr;gap:0.25rem 1rem;}
+    .opt{font-size:0.9rem;color:#333;}
+    .opt strong{color:#0a1a6a;font-weight:700;}
+    .opt.correct-opt{color:#155724;font-weight:600;}
+    .opt.correct-opt strong{color:#155724;}
+
+    /* ─ Answer key ─ */
+    .answer-section{background:#fff;border-radius:12px;padding:1.5rem;border:2px solid #0a1a6a;margin-top:2rem;}
+    .answer-section h2{color:#0a1a6a;font-size:1.1rem;margin-bottom:1rem;text-align:center;}
+    .answer-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:0.4rem;}
+    .ans-item{font-size:0.85rem;background:#f1f3f5;padding:0.3rem 0.5rem;border-radius:6px;}
+    .ans-item strong{color:#0a1a6a;}
+    .ans-correct{color:#155724;font-weight:700;}
+
+    /* ─ Legend ─ */
+    .legend{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem;font-size:0.85rem;}
+    .legend-item{display:flex;align-items:center;gap:0.4rem;}
+    .legend-dot{width:14px;height:14px;border-radius:3px;flex-shrink:0;}
+
+    /* ─ Print styles ─ */
+    @media print{
+      .screen-header .print-btn{display:none;}
+      .screen-header{background:#0a1a6a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+      .question{box-shadow:none;}
+      body{background:#fff;}
+      .answer-section{page-break-before:always;}
+    }
+    @media(max-width:600px){
+      .options{grid-template-columns:1fr;}
+      .q-image{max-width:100%;}
+    }
+  </style>
+</head>
+<body>
+
+<div class="screen-header">
+  <div class="badge">🏆 RECOMPENSA DESBLOQUEADA</div>
+  <h1>40 Preguntas de Práctica</h1>
+  <p>Tema 5: Conectores y Cableado &nbsp;·&nbsp; Montaje y Mantenimiento de Equipos &nbsp;·&nbsp; 2024-2025</p>
+  <button class="print-btn" onclick="window.print()">🖨️ Imprimir / Guardar como PDF</button>
+</div>
+
+<main>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#ffd700;border:1px solid #ccc;"></div> Preguntas del juego (Q1–Q15)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#1a3aaa;border:1px solid #ccc;"></div> Preguntas adicionales (Q16–Q40)</div>
+  </div>
+
+  <div class="section-title">BLOQUE 1 — Preguntas del juego ¿Quién quiere ser millonario? (Q1–Q15)</div>
+
+  <!-- ══════════════════════════════════════════
+       Q1–Q15 (GAME QUESTIONS)
+  ══════════════════════════════════════════ -->
+
+  <div class="question game-q">
+    <div class="q-header"><span class="q-num">Q1</span><span class="q-tag">Identificación visual · Muy fácil</span></div>
+    <img class="q-image" src="images/PS2.jpg" alt="Conector PS/2" onerror="this.style.display='none'">
+    <div class="q-text">¿Cuál es la función del conector mostrado en la imagen? Fíjate en su forma circular y en que aparece en dos colores distintos según el dispositivo que conecta.</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> USB tipo A (rectangular)</div>
+      <div class="opt correct-opt"><strong>B.</strong> PS/2 (DIN mini de 6 pines) ✓</div>
+      <div class="opt"><strong>C.</strong> Jack 3,5 mm (audio)</div>
+      <div class="opt"><strong>D.</strong> RJ-45 (red Ethernet)</div>
+    </div>
+  </div>
+
+  <div class="question game-q">
+    <div class="q-header"><span class="q-num">Q2</span><span class="q-tag">Identificación visual · Fácil</span></div>
+    <img class="q-image" src="images/vga.jpg" alt="Puerto VGA" onerror="this.style.display='none'">
+    <div class="q-text">¿Cómo se denomina el conector de 15 pines mostrado en la imagen?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> DVI-D (digital)</div>
+      <div class="opt correct-opt"><strong>B.</strong> VGA / D-Sub 15 ✓</div>
+      <div class="opt"><strong>C.</strong> DisplayPort 1.4</div>
+      <div class="opt"><strong>D.</strong> HDMI mini</div>
+    </div>
+  </div>
+
+  <div class="question game-q">
+    <div class="q-header"><span class="q-num">Q3</span><span class="q-tag">Identificación visual · Fácil</span></div>
+    <img class="q-image" src="images/rj45vsrj11.jpg" alt="RJ-45 vs RJ-11" onerror="this.style.display='none'">
+    <div class="q-text">La imagen muestra dos conectores de apariencia similar pero diferente tamaño. ¿Cuántos pines tiene el conector MÁS GRANDE y cómo se llama?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> RJ-11 (telefonía, 6 contactos)</div>
+      <div class="opt correct-opt"><strong>B.</strong> RJ-45 (Ethernet, 8 contactos) ✓</div>
+      <div class="opt"><strong>C.</strong> Mini-USB tipo B</div>
+      <div class="opt"><strong>D.</strong> FireWire 400 (4 pines)</div>
+    </div>
+  </div>
+
+  <div class="question game-q">
+    <div class="q-header"><span class="q-num">Q4</span><span class="q-tag">Identificación visual · Fácil</span></div>
+    <img class="q-image" src="images/usbs.png" alt="Tipos de USB" onerror="this.style.display='none'">
+    <div class="q-text">La imagen muestra la evolución de los conectores USB. ¿Cuál de ellos ha sido adoptado como estándar universal en la mayoría de dispositivos portátiles actuales?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> USB tipo A (rectangular grande)</div>
+      <div class="opt"><strong>B.</strong> USB tipo B (cuadrado impresoras)</div>
+      <div class="opt"><strong>C.</strong> Micro-USB tipo B</div>
+      <div class="opt correct-opt"><strong>D.</strong> USB tipo C (ovalado reversible) ✓</div>
+    </div>
+  </div>
+
+  <div class="question game-q">
+    <div class="q-header"><span class="q-num">Q5 ★</span><span class="q-tag">Identificación · Media · SALVAVIDAS</span></div>
+    <img class="q-image" src="images/hdmi.jpg" alt="Conector HDMI" onerror="this.style.display='none'">
+    <div class="q-text">El conector de la imagen es el más extendido para enlazar fuentes de vídeo con pantallas. ¿Cuántos tipos de señal distintos puede transportar simultáneamente en un único cable?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> Solo señal de vídeo analógica</div>
+      <div class="opt"><strong>B.</strong> Señal de red Ethernet</div>
+      <div class="opt correct-opt"><strong>C.</strong> Audio y vídeo digital en un solo cable ✓</div>
+      <div class="opt"><strong>D.</strong> Solo alimentación eléctrica (5V/3A)</div>
+    </div>
+  </div>
+
+  <div class="question game-q">
+    <div class="q-header"><span class="q-num">Q6</span><span class="q-tag">Identificación visual · Media</span></div>
+    <img class="q-image" src="images/paralelo.jpg" alt="Puerto paralelo" onerror="this.style.display='none'">
+    <div class="q-text">¿Cómo se denomina el conector de 25 pines mostrado en la imagen?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> Serie RS-232 (9 pines macho)</div>
+      <div class="opt correct-opt"><strong>B.</strong> Paralelo LPT / Centronics (25 pines) ✓</div>
+      <div class="opt"><strong>C.</strong> SCSI-2 externo</div>
+      <div class="opt"><strong>D.</strong> Puerto IDE externo</div>
+    </div>
+  </div>
+
+  <div class="question game-q">
+    <div class="q-header"><span class="q-num">Q7</span><span class="q-tag">Identificación visual · Media</span></div>
+    <img class="q-image" src="images/jackmicro.png" alt="Conector Jack TRRS" onerror="this.style.display='none'">
+    <div class="q-text">Observa el número de bandas aislantes (anillos negros) del conector Jack de la imagen. ¿Para qué tipo de dispositivo indica esa configuración que está diseñado?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> Solo reproducción de audio estéreo</div>
+      <div class="opt correct-opt"><strong>B.</strong> Auriculares estéreo + micrófono ✓</div>
+      <div class="opt"><strong>C.</strong> Audio envolvente 5.1</div>
+      <div class="opt"><strong>D.</strong> MIDI y audio analógico combinado</div>
+    </div>
+  </div>
+
+  <div class="question game-q">
+    <div class="q-header"><span class="q-num">Q8</span><span class="q-tag">Conocimiento · Media-Alta</span></div>
+    <img class="q-image" src="images/displayport.png" alt="DisplayPort" onerror="this.style.display='none'">
+    <div class="q-text">Un técnico quiere conectar 3 monitores en cadena desde una única salida de la GPU, sin ningún switch de vídeo externo. ¿Qué tecnología exclusiva de DisplayPort lo hace posible?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> eARC (Enhanced Audio Return Channel)</div>
+      <div class="opt correct-opt"><strong>B.</strong> MST – Multi-Stream Transport ✓</div>
+      <div class="opt"><strong>C.</strong> VRR – Variable Refresh Rate</div>
+      <div class="opt"><strong>D.</strong> ALLM – Auto Low Latency Mode</div>
+    </div>
+  </div>
+
+  <div class="question game-q">
+    <div class="q-header"><span class="q-num">Q9</span><span class="q-tag">Conocimiento · Alta</span></div>
+    <img class="q-image" src="images/fibra.png" alt="Fibra óptica" onerror="this.style.display='none'">
+    <div class="q-text">Se necesita un enlace de fibra óptica entre dos edificios separados 5 km. ¿Qué tipo de fibra es la adecuada para esa distancia?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> Fibra multimodo OM4 (núcleo 50 µm, hasta ~550 m)</div>
+      <div class="opt"><strong>B.</strong> Fibra plástica POF (uso doméstico, &lt;50 m)</div>
+      <div class="opt correct-opt"><strong>C.</strong> Fibra monomodo OS2 (núcleo 9 µm, kilómetros) ✓</div>
+      <div class="opt"><strong>D.</strong> Cable coaxial RG-6 (satélite/TV)</div>
+    </div>
+  </div>
+
+  <div class="question game-q">
+    <div class="q-header"><span class="q-num">Q10 ★</span><span class="q-tag">Identificación visual · Alta · SALVAVIDAS</span></div>
+    <img class="q-image" src="images/fuentealimentacion.jpg" alt="Fuente de alimentación ATX" onerror="this.style.display='none'">
+    <div class="q-text">¿Cuántos pines tiene el conector principal de alimentación ATX moderno que conecta la fuente de alimentación a la placa base?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> 20 pines (estándar ATX antiguo)</div>
+      <div class="opt correct-opt"><strong>B.</strong> 24 pines (ATX estándar actual) ✓</div>
+      <div class="opt"><strong>C.</strong> 8 pines (conector EPS para CPU)</div>
+      <div class="opt"><strong>D.</strong> 4 pines (AT histórico)</div>
+    </div>
+  </div>
+
+  <div class="question game-q">
+    <div class="q-header"><span class="q-num">Q11</span><span class="q-tag">Conocimiento · Difícil</span></div>
+    <div class="q-text">¿Qué versión de HDMI fue la primera en soportar nativamente 4K a 120 Hz, tasa de refresco variable (VRR) y canal de audio mejorado (eARC)?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> HDMI 1.4 (2009)</div>
+      <div class="opt"><strong>B.</strong> HDMI 2.0b (2016)</div>
+      <div class="opt correct-opt"><strong>C.</strong> HDMI 2.1 (2017) ✓</div>
+      <div class="opt"><strong>D.</strong> HDMI 3.0 (no existe aún)</div>
+    </div>
+  </div>
+
+  <div class="question game-q">
+    <div class="q-header"><span class="q-num">Q12</span><span class="q-tag">Identificación visual · Difícil</span></div>
+    <img class="q-image" src="images/zigbee.jpg" alt="Módulo ZigBee" onerror="this.style.display='none'">
+    <div class="q-text">El módulo de la imagen implementa un protocolo inalámbrico de corto alcance diseñado específicamente para redes de sensores. ¿Cuál de estas afirmaciones describe MEJOR su uso típico?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> Comunicaciones móviles 5G de alta velocidad</div>
+      <div class="opt correct-opt"><strong>B.</strong> Redes de malla IoT y domótica de muy bajo consumo ✓</div>
+      <div class="opt"><strong>C.</strong> Transmisión inalámbrica de vídeo 4K</div>
+      <div class="opt"><strong>D.</strong> GPS y geolocalización por satélite</div>
+    </div>
+  </div>
+
+  <div class="question game-q">
+    <div class="q-header"><span class="q-num">Q13</span><span class="q-tag">Conocimiento técnico · Muy difícil</span></div>
+    <div class="q-text">¿Cuántos pines tiene el conector interno USB 3.0 (header) ubicado en la placa base, al que se conecta el panel frontal del chasis?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> 9 pines (corresponde al header USB 2.0)</div>
+      <div class="opt"><strong>B.</strong> 14 pines</div>
+      <div class="opt correct-opt"><strong>C.</strong> 19 pines ✓</div>
+      <div class="opt"><strong>D.</strong> 24 pines (USB-C 20 pines frontal)</div>
+    </div>
+  </div>
+
+  <div class="question game-q">
+    <div class="q-header"><span class="q-num">Q14</span><span class="q-tag">Conocimiento técnico · Muy difícil</span></div>
+    <div class="q-text">Un SSD NVMe M.2 con interfaz PCIe Gen 5 x4 alcanza velocidades de lectura secuencial de aproximadamente:</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> ~3,5 GB/s (PCIe 3.0 x4)</div>
+      <div class="opt"><strong>B.</strong> ~7 GB/s (PCIe 4.0 x4)</div>
+      <div class="opt correct-opt"><strong>C.</strong> ~14 GB/s (PCIe 5.0 x4) ✓</div>
+      <div class="opt"><strong>D.</strong> ~28 GB/s (PCIe 6.0 x4, en desarrollo)</div>
+    </div>
+  </div>
+
+  <div class="question game-q">
+    <div class="q-header"><span class="q-num">Q15 🏆</span><span class="q-tag">¡LA PREGUNTA DEL MILLÓN!</span></div>
+    <div class="q-text">En el estándar T568B (el más usado en instalaciones nuevas de red), ¿qué colores ocupan los pines 1 y 2 del conector RJ-45?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> Blanco-Verde / Verde</div>
+      <div class="opt correct-opt"><strong>B.</strong> Blanco-Naranja / Naranja ✓</div>
+      <div class="opt"><strong>C.</strong> Blanco-Azul / Azul</div>
+      <div class="opt"><strong>D.</strong> Blanco-Marrón / Marrón</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       Q16–Q40 (ADDITIONAL QUESTIONS)
+  ══════════════════════════════════════════ -->
+  <div class="section-title">BLOQUE 2 — Preguntas adicionales basadas en los apuntes (Q16–Q40)</div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q16</span><span class="q-tag">Definición · Básico</span></div>
+    <div class="q-text">¿Qué significa el acrónimo "USB"?</div>
+    <div class="options">
+      <div class="opt correct-opt"><strong>A.</strong> Universal Serial Bus ✓</div>
+      <div class="opt"><strong>B.</strong> Ultra Speed Bandwidth</div>
+      <div class="opt"><strong>C.</strong> Unified System Board</div>
+      <div class="opt"><strong>D.</strong> Universal Sync Bridge</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q17</span><span class="q-tag">Conocimiento · Básico</span></div>
+    <div class="q-text">¿Cuántos pines de contacto tiene el conector RJ-45 utilizado en redes Ethernet?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> 4 pines</div>
+      <div class="opt"><strong>B.</strong> 6 pines</div>
+      <div class="opt correct-opt"><strong>C.</strong> 8 pines ✓</div>
+      <div class="opt"><strong>D.</strong> 12 pines</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q18</span><span class="q-tag">Conocimiento · Básico</span></div>
+    <div class="q-text">¿De qué color es el puerto de salida de audio principal (line out / salida a altavoces) en una tarjeta de sonido estándar de PC?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> Rosa (micrófono)</div>
+      <div class="opt"><strong>B.</strong> Azul (line in)</div>
+      <div class="opt correct-opt"><strong>C.</strong> Verde (line out) ✓</div>
+      <div class="opt"><strong>D.</strong> Naranja (subwoofer)</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q19</span><span class="q-tag">Conocimiento · Básico</span></div>
+    <div class="q-text">¿Cuántos pines tiene el conector de DATOS SATA (el más pequeño y plano, diferente al de alimentación)?</div>
+    <div class="options">
+      <div class="opt correct-opt"><strong>A.</strong> 7 pines ✓</div>
+      <div class="opt"><strong>B.</strong> 9 pines</div>
+      <div class="opt"><strong>C.</strong> 15 pines (es el de alimentación)</div>
+      <div class="opt"><strong>D.</strong> 22 pines</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q20</span><span class="q-tag">Conocimiento · Básico</span></div>
+    <div class="q-text">¿Cuál es la velocidad máxima de transferencia teórica de la interfaz SATA III?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> 3 Gbps (SATA II)</div>
+      <div class="opt correct-opt"><strong>B.</strong> 6 Gbps ✓</div>
+      <div class="opt"><strong>C.</strong> 10 Gbps</div>
+      <div class="opt"><strong>D.</strong> 20 Gbps</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q21</span><span class="q-tag">Identificación visual · Media</span></div>
+    <img class="q-image" src="images/dvi.jpg" alt="Conector DVI" onerror="this.style.display='none'">
+    <div class="q-text">¿Cuál de los tipos de conector DVI incorpora pines adicionales en forma de cruz (palillo) que le permiten ser compatible con monitores analógicos mediante un adaptador pasivo VGA?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> DVI-D (solo señal digital, sin pines analógicos)</div>
+      <div class="opt"><strong>B.</strong> DVI-A (solo señal analógica, sin pines digitales)</div>
+      <div class="opt correct-opt"><strong>C.</strong> DVI-I (Integrated: digital + analógico) ✓</div>
+      <div class="opt"><strong>D.</strong> Los tres tipos son físicamente idénticos</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q22</span><span class="q-tag">Identificación visual · Media</span></div>
+    <img class="q-image" src="images/firewire.jpg" alt="Conector FireWire" onerror="this.style.display='none'">
+    <div class="q-text">FireWire es el nombre comercial de Apple para el estándar de bus serie de alta velocidad también conocido como:</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> IEEE 802.11 (Wi-Fi)</div>
+      <div class="opt correct-opt"><strong>B.</strong> IEEE 1394 ✓</div>
+      <div class="opt"><strong>C.</strong> IEEE 802.3 (Ethernet)</div>
+      <div class="opt"><strong>D.</strong> IEEE 1284 (Paralelo)</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q23</span><span class="q-tag">Conocimiento · Media</span></div>
+    <div class="q-text">¿Qué versión del estándar USB alcanza los 40 Gbps de velocidad de transferencia bidireccional?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> USB 3.2 Gen 2 (10 Gbps)</div>
+      <div class="opt"><strong>B.</strong> USB 3.2 Gen 2×2 (20 Gbps)</div>
+      <div class="opt"><strong>C.</strong> USB4 Gen 2×2 (20 Gbps)</div>
+      <div class="opt correct-opt"><strong>D.</strong> USB4 Gen 3×2 (40 Gbps) ✓</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q24</span><span class="q-tag">Conocimiento · Media</span></div>
+    <div class="q-text">De entre las siguientes tecnologías inalámbricas, ¿cuál tiene mayor alcance (puede llegar a kilómetros de distancia)?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> Bluetooth 5.0 (~400 m en campo abierto)</div>
+      <div class="opt"><strong>B.</strong> ZigBee (~100 m por salto)</div>
+      <div class="opt"><strong>C.</strong> Wi-Fi 6 (~200 m en exteriores)</div>
+      <div class="opt correct-opt"><strong>D.</strong> LoRa / LoRaWAN (hasta 15 km en rurales) ✓</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q25</span><span class="q-tag">Conocimiento · Media</span></div>
+    <div class="q-text">La fuente de alimentación ATX incluye, además del conector principal de 24 pines, un segundo conector cuadrado que se inserta cerca del socket. ¿Cuántos pines tiene en su configuración más habitual?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> 4 pines (conector antiguo P4)</div>
+      <div class="opt correct-opt"><strong>B.</strong> 8 pines (EPS 4+4 desmontable) ✓</div>
+      <div class="opt"><strong>C.</strong> 6 pines (PCIe GPU)</div>
+      <div class="opt"><strong>D.</strong> 24 pines (ATX principal)</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q26</span><span class="q-tag">Definición · Media</span></div>
+    <div class="q-text">¿Qué significa el acrónimo NVMe?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> New Virtual Memory Express</div>
+      <div class="opt correct-opt"><strong>B.</strong> Non-Volatile Memory Express ✓</div>
+      <div class="opt"><strong>C.</strong> Network Video Module Enhanced</div>
+      <div class="opt"><strong>D.</strong> Next Version Media Engine</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q27</span><span class="q-tag">Identificación visual · Media</span></div>
+    <img class="q-image" src="images/rcaaudio.png" alt="Conectores RCA audio" onerror="this.style.display='none'">
+    <div class="q-text">En un conector RCA de audio estéreo, ¿qué color indica el canal de audio DERECHO?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> Blanco (canal izquierdo)</div>
+      <div class="opt correct-opt"><strong>B.</strong> Rojo (canal derecho) ✓</div>
+      <div class="opt"><strong>C.</strong> Amarillo (vídeo compuesto)</div>
+      <div class="opt"><strong>D.</strong> Negro (masa/tierra)</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q28</span><span class="q-tag">Conocimiento · Media-Alta</span></div>
+    <div class="q-text">Para una instalación nueva de red a 10 Gbps hasta 100 metros, ¿qué categoría de cable UTP es la mínima certificada?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> Cat5e (máx. 1 Gbps)</div>
+      <div class="opt"><strong>B.</strong> Cat6 (10 Gbps hasta 55 m)</div>
+      <div class="opt correct-opt"><strong>C.</strong> Cat6a (10 Gbps hasta 100 m) ✓</div>
+      <div class="opt"><strong>D.</strong> Cat8 (25/40 Gbps, para CPD)</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q29</span><span class="q-tag">Conocimiento · Alta</span></div>
+    <div class="q-text">El conector de 16 pines 12VHPWR (12V-2×6), presente en GPUs de gama alta como la RTX 4090, ¿cuántos vatios puede suministrar como máximo?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> 150 W</div>
+      <div class="opt"><strong>B.</strong> 300 W</div>
+      <div class="opt"><strong>C.</strong> 450 W</div>
+      <div class="opt correct-opt"><strong>D.</strong> 600 W ✓</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q30</span><span class="q-tag">Conocimiento técnico · Alta</span></div>
+    <div class="q-text">¿Cuántos pines tiene el header HD Audio (HDA) de la placa base que conecta el audio frontal del chasis?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> 6 pines</div>
+      <div class="opt correct-opt"><strong>B.</strong> 9 pines (10 posiciones, 1 bloqueada) ✓</div>
+      <div class="opt"><strong>C.</strong> 12 pines</div>
+      <div class="opt"><strong>D.</strong> 19 pines</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q31</span><span class="q-tag">Conocimiento · Alta</span></div>
+    <div class="q-text">Los conectores LC de fibra óptica se diferencian de los SC en que los LC son:</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> Más grandes y resistentes (SAN empresarial)</div>
+      <div class="opt correct-opt"><strong>B.</strong> Más pequeños, usados en SFP/SFP+ de switches ✓</div>
+      <div class="opt"><strong>C.</strong> Solo compatibles con fibra multimodo</div>
+      <div class="opt"><strong>D.</strong> Conexión magnética (sin presión)</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q32</span><span class="q-tag">Conocimiento · Alta</span></div>
+    <div class="q-text">¿Qué versión de Bluetooth introdujo por primera vez el modo de bajo consumo (BLE / Bluetooth Smart)?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> Bluetooth 2.0 + EDR</div>
+      <div class="opt"><strong>B.</strong> Bluetooth 3.0 + HS</div>
+      <div class="opt correct-opt"><strong>C.</strong> Bluetooth 4.0 ✓</div>
+      <div class="opt"><strong>D.</strong> Bluetooth 5.0</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q33</span><span class="q-tag">Identificación visual · Media</span></div>
+    <img class="q-image" src="images/midi.jpg" alt="Conector MIDI DIN 5 pines" onerror="this.style.display='none'">
+    <div class="q-text">El conector DIN de 5 pines mostrado en la imagen se usa en el estándar:</div>
+    <div class="options">
+      <div class="opt correct-opt"><strong>A.</strong> MIDI (instrumentos musicales electrónicos) ✓</div>
+      <div class="opt"><strong>B.</strong> PS/2 (teclado/ratón, usa DIN mini de 6 pines)</div>
+      <div class="opt"><strong>C.</strong> S-Video (vídeo compuesto)</div>
+      <div class="opt"><strong>D.</strong> XLR (audio profesional balanceado)</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q34</span><span class="q-tag">Conocimiento · Media</span></div>
+    <div class="q-text">¿Cuál es la principal ventaja PRÁCTICA y distintiva del conector USB-C frente al USB-A que los usuarios notan a diario?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> Mayor resistencia mecánica al desgaste</div>
+      <div class="opt"><strong>B.</strong> Exclusivamente mayor velocidad de datos</div>
+      <div class="opt correct-opt"><strong>C.</strong> Es reversible: se conecta en cualquier orientación ✓</div>
+      <div class="opt"><strong>D.</strong> Menor coste de fabricación</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q35</span><span class="q-tag">Conocimiento técnico · Alta</span></div>
+    <div class="q-text">En el header del panel frontal (F_PANEL / JFP1) de la placa base, ¿qué señal corresponde al LED que PARPADEA durante las operaciones de lectura y escritura del almacenamiento interno?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> PWR_SW (Power Switch)</div>
+      <div class="opt correct-opt"><strong>B.</strong> HDD_LED+ / HDD_LED– ✓</div>
+      <div class="opt"><strong>C.</strong> RESET_SW (Reset Switch)</div>
+      <div class="opt"><strong>D.</strong> SPEAKER (altavoz interno)</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q36</span><span class="q-tag">Conocimiento · Básico</span></div>
+    <div class="q-text">Un cable de red UTP Cat6 (o cualquier categoría actual) está formado por:</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> 2 pares (4 conductores)</div>
+      <div class="opt"><strong>B.</strong> 3 pares (6 conductores)</div>
+      <div class="opt correct-opt"><strong>C.</strong> 4 pares (8 conductores) ✓</div>
+      <div class="opt"><strong>D.</strong> 6 pares (12 conductores)</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q37</span><span class="q-tag">Conocimiento · Media</span></div>
+    <div class="q-text">¿Qué generación de Wi-Fi fue la primera en introducir el uso de la banda de 6 GHz (espectro adicional no congestionado)?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> Wi-Fi 5 (IEEE 802.11ac) — solo 5 GHz</div>
+      <div class="opt"><strong>B.</strong> Wi-Fi 6 (IEEE 802.11ax) — 2,4 y 5 GHz</div>
+      <div class="opt correct-opt"><strong>C.</strong> Wi-Fi 6E (IEEE 802.11ax extendido) — añade 6 GHz ✓</div>
+      <div class="opt"><strong>D.</strong> Wi-Fi 7 (IEEE 802.11be) — multi-link</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q38</span><span class="q-tag">Conocimiento · Media</span></div>
+    <div class="q-text">Thunderbolt 3 y Thunderbolt 4 utilizan el mismo conector físico que un estándar USB muy extendido. ¿Cuál es?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> Mini DisplayPort</div>
+      <div class="opt correct-opt"><strong>B.</strong> USB tipo C ✓</div>
+      <div class="opt"><strong>C.</strong> Conector Thunderbolt propietario (Lightning)</div>
+      <div class="opt"><strong>D.</strong> USB tipo A 3.0</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q39</span><span class="q-tag">Identificación visual · Media</span></div>
+    <img class="q-image" src="images/bnc.jpg" alt="Conector BNC" onerror="this.style.display='none'">
+    <div class="q-text">El conector BNC de la imagen (de bayoneta) se usa principalmente en:</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> Redes Ethernet de alta velocidad</div>
+      <div class="opt"><strong>B.</strong> Cámaras fotográficas DSLR</div>
+      <div class="opt correct-opt"><strong>C.</strong> Sistemas CCTV y señal de vídeo coaxial analógico ✓</div>
+      <div class="opt"><strong>D.</strong> Antenas Wi-Fi externas (SMA)</div>
+    </div>
+  </div>
+
+  <div class="question extra-q">
+    <div class="q-header"><span class="q-num">Q40</span><span class="q-tag">Conocimiento · Básico</span></div>
+    <div class="q-text">¿Cuál es la velocidad máxima de transferencia del estándar USB 2.0 en su modo de mayor rendimiento (Hi-Speed)?</div>
+    <div class="options">
+      <div class="opt"><strong>A.</strong> 12 Mbps (Full Speed)</div>
+      <div class="opt correct-opt"><strong>B.</strong> 480 Mbps (Hi-Speed) ✓</div>
+      <div class="opt"><strong>C.</strong> 5 Gbps (SuperSpeed, es USB 3.0)</div>
+      <div class="opt"><strong>D.</strong> 1,5 Mbps (Low Speed)</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       ANSWER KEY
+  ══════════════════════════════════════════ -->
+  <div class="answer-section">
+    <h2>🔑 CLAVE DE RESPUESTAS</h2>
+    <div class="answer-grid">
+      <div class="ans-item"><strong>Q1:</strong> <span class="ans-correct">B</span></div>
+      <div class="ans-item"><strong>Q2:</strong> <span class="ans-correct">B</span></div>
+      <div class="ans-item"><strong>Q3:</strong> <span class="ans-correct">B</span></div>
+      <div class="ans-item"><strong>Q4:</strong> <span class="ans-correct">D</span></div>
+      <div class="ans-item"><strong>Q5:</strong> <span class="ans-correct">C</span></div>
+      <div class="ans-item"><strong>Q6:</strong> <span class="ans-correct">B</span></div>
+      <div class="ans-item"><strong>Q7:</strong> <span class="ans-correct">B</span></div>
+      <div class="ans-item"><strong>Q8:</strong> <span class="ans-correct">B</span></div>
+      <div class="ans-item"><strong>Q9:</strong> <span class="ans-correct">C</span></div>
+      <div class="ans-item"><strong>Q10:</strong> <span class="ans-correct">B</span></div>
+      <div class="ans-item"><strong>Q11:</strong> <span class="ans-correct">C</span></div>
+      <div class="ans-item"><strong>Q12:</strong> <span class="ans-correct">B</span></div>
+      <div class="ans-item"><strong>Q13:</strong> <span class="ans-correct">C</span></div>
+      <div class="ans-item"><strong>Q14:</strong> <span class="ans-correct">C</span></div>
+      <div class="ans-item"><strong>Q15:</strong> <span class="ans-correct">B</span></div>
+      <div class="ans-item"><strong>Q16:</strong> <span class="ans-correct">A</span></div>
+      <div class="ans-item"><strong>Q17:</strong> <span class="ans-correct">C</span></div>
+      <div class="ans-item"><strong>Q18:</strong> <span class="ans-correct">C</span></div>
+      <div class="ans-item"><strong>Q19:</strong> <span class="ans-correct">A</span></div>
+      <div class="ans-item"><strong>Q20:</strong> <span class="ans-correct">B</span></div>
+      <div class="ans-item"><strong>Q21:</strong> <span class="ans-correct">C</span></div>
+      <div class="ans-item"><strong>Q22:</strong> <span class="ans-correct">B</span></div>
+      <div class="ans-item"><strong>Q23:</strong> <span class="ans-correct">D</span></div>
+      <div class="ans-item"><strong>Q24:</strong> <span class="ans-correct">D</span></div>
+      <div class="ans-item"><strong>Q25:</strong> <span class="ans-correct">B</span></div>
+      <div class="ans-item"><strong>Q26:</strong> <span class="ans-correct">B</span></div>
+      <div class="ans-item"><strong>Q27:</strong> <span class="ans-correct">B</span></div>
+      <div class="ans-item"><strong>Q28:</strong> <span class="ans-correct">C</span></div>
+      <div class="ans-item"><strong>Q29:</strong> <span class="ans-correct">D</span></div>
+      <div class="ans-item"><strong>Q30:</strong> <span class="ans-correct">B</span></div>
+      <div class="ans-item"><strong>Q31:</strong> <span class="ans-correct">B</span></div>
+      <div class="ans-item"><strong>Q32:</strong> <span class="ans-correct">C</span></div>
+      <div class="ans-item"><strong>Q33:</strong> <span class="ans-correct">A</span></div>
+      <div class="ans-item"><strong>Q34:</strong> <span class="ans-correct">C</span></div>
+      <div class="ans-item"><strong>Q35:</strong> <span class="ans-correct">B</span></div>
+      <div class="ans-item"><strong>Q36:</strong> <span class="ans-correct">C</span></div>
+      <div class="ans-item"><strong>Q37:</strong> <span class="ans-correct">C</span></div>
+      <div class="ans-item"><strong>Q38:</strong> <span class="ans-correct">B</span></div>
+      <div class="ans-item"><strong>Q39:</strong> <span class="ans-correct">C</span></div>
+      <div class="ans-item"><strong>Q40:</strong> <span class="ans-correct">B</span></div>
+    </div>
+    <p style="text-align:center;margin-top:1.2rem;color:#667;font-size:0.82rem;">★ = Punto de salvavidas garantizado &nbsp;|&nbsp; IES Valle del Jerte · MME 2024-2025</p>
+  </div>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tema 5: Conectores y Cableado · MME</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --navy:#0a1a6a;--blue:#1a3aaa;--gold:#ffd700;--gold2:#ffaa00;
+      --bg:#f0f2f8;--card:#fff;--text:#1a1a2e;--muted:#667;
+    }
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);}
+
+    /* ─ HEADER ─ */
+    header{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;padding:0;}
+    .header-top{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 2rem;border-bottom:1px solid rgba(255,255,255,0.1);flex-wrap:wrap;gap:0.5rem;}
+    .school-info{font-size:0.8rem;opacity:0.8;}
+    .course-badge{background:rgba(255,215,0,0.2);border:1px solid rgba(255,215,0,0.4);color:var(--gold);font-size:0.78rem;padding:0.25rem 0.7rem;border-radius:20px;font-weight:600;}
+    .header-main{padding:2.5rem 2rem;text-align:center;}
+    .header-main h1{font-size:clamp(1.6rem,4vw,2.5rem);font-weight:900;margin-bottom:0.5rem;}
+    .header-main h1 span{color:var(--gold);}
+    .header-main p{font-size:1rem;opacity:0.85;max-width:600px;margin:0 auto;}
+    .header-tags{display:flex;gap:0.5rem;justify-content:center;margin-top:1rem;flex-wrap:wrap;}
+    .tag{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);color:#e8e8ff;font-size:0.78rem;padding:0.2rem 0.7rem;border-radius:20px;}
+
+    /* ─ MAIN ─ */
+    main{max-width:1100px;margin:0 auto;padding:2.5rem 1.5rem;}
+    .section-label{font-size:0.75rem;font-weight:700;color:var(--blue);letter-spacing:2px;text-transform:uppercase;margin-bottom:1rem;}
+
+    /* ─ HERO CARD (Millonario) ─ */
+    .hero-card{background:linear-gradient(135deg,var(--navy),#0d2080,var(--navy));color:#fff;border-radius:20px;padding:2.5rem 2rem;margin-bottom:2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;position:relative;overflow:hidden;box-shadow:0 8px 30px rgba(10,26,106,0.35);}
+    .hero-card::before{content:'';position:absolute;top:-50%;right:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(255,215,0,0.08),transparent 70%);border-radius:50%;pointer-events:none;}
+    .hero-text h2{font-size:clamp(1.4rem,3vw,2rem);font-weight:900;background:linear-gradient(135deg,var(--gold),#ffcc00,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.5rem;}
+    .hero-text p{color:#b8c8ff;font-size:0.97rem;line-height:1.6;max-width:520px;margin-bottom:1.2rem;}
+    .hero-features{display:flex;gap:1rem;flex-wrap:wrap;}
+    .hf{display:flex;align-items:center;gap:0.4rem;font-size:0.82rem;color:#99aadd;}
+    .btn-play{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border:none;padding:0.9rem 2.2rem;font-size:1.1rem;font-weight:900;border-radius:50px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;white-space:nowrap;box-shadow:0 4px 20px rgba(255,215,0,0.3);}
+    .btn-play:hover{transform:scale(1.06);box-shadow:0 6px 30px rgba(255,215,0,0.5);}
+    .hero-prize{text-align:center;flex-shrink:0;}
+    .prize-amount{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;background:linear-gradient(135deg,var(--gold),#ffcc00,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
+    .prize-label{font-size:0.8rem;color:#8899cc;margin-top:0.2rem;}
+
+    /* ─ RESOURCE GRID ─ */
+    .resources-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem;margin-bottom:2rem;}
+    .resource-card{background:var(--card);border-radius:16px;padding:1.6rem;border:1px solid #dde4f0;box-shadow:0 2px 10px rgba(0,0,0,0.06);transition:all 0.25s;display:flex;flex-direction:column;gap:0.8rem;}
+    .resource-card:hover{transform:translateY(-3px);box-shadow:0 6px 25px rgba(10,26,106,0.14);border-color:#b8c8ee;}
+    .rc-icon{font-size:2rem;line-height:1;}
+    .rc-title{font-size:1.05rem;font-weight:800;color:var(--navy);}
+    .rc-desc{font-size:0.88rem;color:var(--muted);line-height:1.55;flex:1;}
+    .rc-link{display:inline-flex;align-items:center;gap:0.4rem;background:var(--navy);color:#fff;text-decoration:none;padding:0.5rem 1.2rem;border-radius:20px;font-size:0.85rem;font-weight:700;transition:all 0.2s;align-self:flex-start;}
+    .rc-link:hover{background:var(--blue);}
+    .rc-link.secondary{background:transparent;color:var(--navy);border:2px solid var(--navy);}
+    .rc-link.secondary:hover{background:var(--navy);color:#fff;}
+
+    /* ─ QUICK REFERENCE ─ */
+    .reference-section{background:var(--card);border-radius:16px;padding:1.8rem;border:1px solid #dde4f0;box-shadow:0 2px 10px rgba(0,0,0,0.06);margin-bottom:2rem;}
+    .reference-section h3{font-size:1.05rem;font-weight:800;color:var(--navy);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.5rem;}
+    .connector-table{width:100%;border-collapse:collapse;font-size:0.84rem;}
+    .connector-table th{background:var(--navy);color:#fff;padding:0.5rem 0.7rem;text-align:left;font-weight:700;}
+    .connector-table th:first-child{border-radius:8px 0 0 0;}
+    .connector-table th:last-child{border-radius:0 8px 0 0;}
+    .connector-table td{padding:0.45rem 0.7rem;border-bottom:1px solid #eef0f8;vertical-align:top;}
+    .connector-table tr:hover td{background:#f6f8ff;}
+    .connector-table tr:last-child td{border-bottom:none;}
+    .badge-tag{display:inline-block;font-size:0.68rem;font-weight:700;padding:0.1rem 0.45rem;border-radius:8px;white-space:nowrap;}
+    .badge-modern{background:#e6f4ea;color:#155724;}
+    .badge-video{background:#e8f0fe;color:#1a3aaa;}
+    .badge-audio{background:#fff3e0;color:#8a4500;}
+    .badge-net{background:#e3f2fd;color:#0d47a1;}
+    .badge-power{background:#fce4ec;color:#880e4f;}
+    .badge-legacy{background:#f5f5f5;color:#555;}
+
+    /* ─ TIPS SECTION ─ */
+    .tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-bottom:2rem;}
+    .tip-card{background:var(--card);border-radius:12px;padding:1.2rem;border-left:4px solid var(--gold);box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+    .tip-card h4{font-size:0.88rem;font-weight:800;color:var(--navy);margin-bottom:0.4rem;}
+    .tip-card p{font-size:0.82rem;color:var(--muted);line-height:1.5;}
+    .tip-card code{background:#f0f2ff;color:var(--navy);padding:0.1rem 0.35rem;border-radius:4px;font-size:0.8rem;font-family:monospace;}
+
+    /* ─ FOOTER ─ */
+    footer{background:var(--navy);color:#8899cc;text-align:center;padding:1.2rem;font-size:0.8rem;}
+    footer strong{color:#b8c8ff;}
+
+    @media(max-width:640px){
+      .hero-card{flex-direction:column;text-align:center;}
+      .hero-features{justify-content:center;}
+      .hero-prize{display:none;}
+      .header-top{justify-content:center;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─ HEADER ─ -->
+<header>
+  <div class="header-top">
+    <div class="school-info">📍 IES Valle del Jerte (Cabezuela del Valle) &nbsp;·&nbsp; Curso 2024-2025</div>
+    <div class="course-badge">Ciclo Formativo de Grado Medio</div>
+  </div>
+  <div class="header-main">
+    <h1>🔌 Tema 5: <span>Conectores y Cableado</span></h1>
+    <p>Montaje y Mantenimiento de Equipos &mdash; Recursos educativos del tema</p>
+    <div class="header-tags">
+      <span class="tag">USB · HDMI · DisplayPort</span>
+      <span class="tag">RJ-45 · Fibra óptica</span>
+      <span class="tag">SATA · NVMe M.2</span>
+      <span class="tag">Alimentación ATX</span>
+      <span class="tag">Panel frontal · Headers</span>
+      <span class="tag">WiFi · Bluetooth · ZigBee</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ─ HERO: MILLONARIO ─ -->
+  <div class="section-label">🎮 Juego interactivo</div>
+  <div class="hero-card">
+    <div class="hero-text">
+      <h2>¿Quién quiere ser millonario?</h2>
+      <p>Pon a prueba tus conocimientos sobre conectores y puertos con este juego interactivo. 15 preguntas de dificultad creciente, muchas con imágenes reales para identificar. ¡Llega al millón y desbloquea tu recompensa!</p>
+      <div class="hero-features">
+        <span class="hf">📷 Preguntas con imágenes reales</span>
+        <span class="hf">💡 3 comodines disponibles</span>
+        <span class="hf">★ 2 salvavidas garantizados</span>
+        <span class="hf">🏆 Premio: 40 preguntas PDF</span>
+      </div>
+      <br>
+      <a href="millonario.html" class="btn-play">¡ JUGAR AHORA !</a>
+    </div>
+    <div class="hero-prize">
+      <div class="prize-amount">1.000.000</div>
+      <div class="prize-label">puntos en juego</div>
+    </div>
+  </div>
+
+  <!-- ─ RESOURCE CARDS ─ -->
+  <div class="section-label">📚 Recursos del tema</div>
+  <div class="resources-grid">
+
+    <div class="resource-card">
+      <div class="rc-icon">📝</div>
+      <div class="rc-title">40 Preguntas de práctica</div>
+      <div class="rc-desc">Banco completo de 40 preguntas tipo test (con imágenes y clave de respuestas). Incluye las 15 preguntas del juego más 25 preguntas adicionales basadas en los apuntes. Puedes imprimirlo o guardarlo como PDF.</div>
+      <a href="preguntas.html" class="rc-link">Ver preguntas →</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="rc-icon">📋</div>
+      <div class="rc-title">Guía rápida de conectores</div>
+      <div class="rc-desc">Tabla resumen con los conectores más importantes que debes conocer hoy: tipo, velocidad/resolución, uso típico y si es moderno u obsoleto. Perfecta para repasar antes de un examen.</div>
+      <a href="#quick-ref" class="rc-link secondary">Ver tabla ↓</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="rc-icon">🔬</div>
+      <div class="rc-title">Apuntes del tema (LaTeX)</div>
+      <div class="rc-desc">Documento completo con todos los conectores modernos: USB 2.0 → USB4, HDMI 2.1, DisplayPort 2.1, RJ-45 con crimpado T568B, NVMe M.2, panel frontal, headers internos y conectividad inalámbrica. Compílalo con LaTeX para obtener el PDF.</div>
+      <span class="rc-link" style="cursor:default;opacity:0.6;">Resumen_Tema5_MME_Moderno.tex</span>
+    </div>
+
+    <div class="resource-card">
+      <div class="rc-icon">🎬</div>
+      <div class="rc-title">Vídeos recomendados</div>
+      <div class="rc-desc">Busca en YouTube estos términos para complementar los apuntes:<br><br>
+        • <strong>"tipos de conectores USB explicados"</strong><br>
+        • <strong>"cómo crimpear cable RJ-45 paso a paso"</strong><br>
+        • <strong>"diferencia HDMI DisplayPort"</strong><br>
+        • <strong>"instalar SSD M.2 NVMe placa base"</strong><br>
+        • <strong>"conectar panel frontal PC"</strong>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─ QUICK REFERENCE TABLE ─ -->
+  <div id="quick-ref" class="reference-section">
+    <h3>⚡ Guía rápida &mdash; Conectores que debes conocer</h3>
+    <table class="connector-table">
+      <thead>
+        <tr>
+          <th>Conector</th>
+          <th>Tipo / Uso</th>
+          <th>Dato clave</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>USB-A 3.2 Gen 1</strong></td>
+          <td>Periféricos, pendrives</td>
+          <td>5 Gbps · azul interior</td>
+          <td><span class="badge-tag badge-modern">Vigente</span></td>
+        </tr>
+        <tr>
+          <td><strong>USB tipo C</strong></td>
+          <td>Smartphones, portátiles, hubs</td>
+          <td>Reversible · hasta 40 Gbps (USB4)</td>
+          <td><span class="badge-tag badge-modern">Vigente</span></td>
+        </tr>
+        <tr>
+          <td><strong>Thunderbolt 4</strong></td>
+          <td>Daisy-chain, eGPU, dock</td>
+          <td>40 Gbps · conector USB-C</td>
+          <td><span class="badge-tag badge-modern">Vigente</span></td>
+        </tr>
+        <tr>
+          <td><strong>HDMI 2.1</strong></td>
+          <td>TV, monitor, consolas</td>
+          <td>4K@120Hz · VRR · eARC</td>
+          <td><span class="badge-tag badge-video">Vídeo</span></td>
+        </tr>
+        <tr>
+          <td><strong>DisplayPort 2.1</strong></td>
+          <td>Monitores PC, multi-monitor MST</td>
+          <td>80 Gbps · 8K@60Hz</td>
+          <td><span class="badge-tag badge-video">Vídeo</span></td>
+        </tr>
+        <tr>
+          <td><strong>Jack 3,5 mm TRS</strong></td>
+          <td>Auriculares (solo audio)</td>
+          <td>3 conductores: L + R + GND</td>
+          <td><span class="badge-tag badge-audio">Audio</span></td>
+        </tr>
+        <tr>
+          <td><strong>Jack 3,5 mm TRRS</strong></td>
+          <td>Auriculares + micrófono</td>
+          <td>4 conductores · smartphones</td>
+          <td><span class="badge-tag badge-audio">Audio</span></td>
+        </tr>
+        <tr>
+          <td><strong>RJ-45 (8P8C)</strong></td>
+          <td>Red Ethernet LAN</td>
+          <td>Cat6a → 10 Gbps / 100 m</td>
+          <td><span class="badge-tag badge-net">Red</span></td>
+        </tr>
+        <tr>
+          <td><strong>LC / SC fibra</strong></td>
+          <td>Fibra óptica SFP, interconexión</td>
+          <td>LC pequeño (SFP) · SC grande</td>
+          <td><span class="badge-tag badge-net">Red</span></td>
+        </tr>
+        <tr>
+          <td><strong>SATA III (datos)</strong></td>
+          <td>HDD y SSD 2,5"/3,5"</td>
+          <td>6 Gbps · 7 pines planos</td>
+          <td><span class="badge-tag badge-modern">Vigente</span></td>
+        </tr>
+        <tr>
+          <td><strong>NVMe M.2 (llave M)</strong></td>
+          <td>SSD de alta velocidad</td>
+          <td>PCIe 5.0 x4 → ~14 GB/s</td>
+          <td><span class="badge-tag badge-modern">Vigente</span></td>
+        </tr>
+        <tr>
+          <td><strong>ATX 24 pines</strong></td>
+          <td>Alimentación placa base</td>
+          <td>Conector principal de la fuente</td>
+          <td><span class="badge-tag badge-power">Alimentación</span></td>
+        </tr>
+        <tr>
+          <td><strong>EPS 8 pines (4+4)</strong></td>
+          <td>Alimentación CPU 12V</td>
+          <td>Conector cuadrado cerca de la CPU</td>
+          <td><span class="badge-tag badge-power">Alimentación</span></td>
+        </tr>
+        <tr>
+          <td><strong>PCIe 6+2 pines</strong></td>
+          <td>Alimentación GPU</td>
+          <td>75W (6p) · 150W (8p)</td>
+          <td><span class="badge-tag badge-power">Alimentación</span></td>
+        </tr>
+        <tr>
+          <td><strong>F_PANEL (JFP1)</strong></td>
+          <td>Panel frontal del chasis</td>
+          <td>PWR_SW · RST · LEDs · SPK</td>
+          <td><span class="badge-tag badge-modern">Interno</span></td>
+        </tr>
+        <tr>
+          <td><strong>USB 3.0 Header</strong></td>
+          <td>USB frontal del chasis</td>
+          <td>19 pines (20 posiciones)</td>
+          <td><span class="badge-tag badge-modern">Interno</span></td>
+        </tr>
+        <tr>
+          <td><strong>HD Audio Header</strong></td>
+          <td>Audio frontal del chasis</td>
+          <td>9 pines · Intel HDA</td>
+          <td><span class="badge-tag badge-modern">Interno</span></td>
+        </tr>
+        <tr>
+          <td><strong>VGA / DVI / PS/2</strong></td>
+          <td>Vídeo analógico / ratón/teclado</td>
+          <td>No recomendados en instalaciones nuevas</td>
+          <td><span class="badge-tag badge-legacy">Obsoleto</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─ TIPS ─ -->
+  <div class="section-label">💡 Claves para el examen</div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <h4>T568B: colores RJ-45</h4>
+      <p>Pines 1-8: <code>B-N / N / B-V / Az / B-Az / V / B-M / M</code><br>(B-Naranja, Naranja, B-Verde, Azul, B-Azul, Verde, B-Marrón, Marrón)</p>
+    </div>
+    <div class="tip-card">
+      <h4>Colores de audio en PC</h4>
+      <p><strong>Verde</strong> = line out (altavoces)<br><strong>Rosa</strong> = micrófono<br><strong>Azul</strong> = line in<br><strong>Naranja</strong> = subwoofer/central</p>
+    </div>
+    <div class="tip-card">
+      <h4>USB: velocidades clave</h4>
+      <p>USB 2.0 → <code>480 Mbps</code><br>USB 3.2 Gen 1 → <code>5 Gbps</code><br>USB 3.2 Gen 2 → <code>10 Gbps</code><br>USB4 Gen 3×2 → <code>40 Gbps</code></p>
+    </div>
+    <div class="tip-card">
+      <h4>M.2: llave y velocidad</h4>
+      <p>Llave <strong>M</strong> = NVMe (PCIe)<br>Llave <strong>B+M</strong> = SATA o PCIe x2<br>Gen 4: ~7 GB/s · Gen 5: ~14 GB/s</p>
+    </div>
+    <div class="tip-card">
+      <h4>Fibra: distancia máxima</h4>
+      <p><strong>Multimodo</strong> (OM4): hasta ~550 m<br><strong>Monomodo</strong> (OS2): kilómetros<br>Usa monomodo para inter-edificios</p>
+    </div>
+    <div class="tip-card">
+      <h4>Panel frontal (F_PANEL)</h4>
+      <p>Conecta: <code>PWR_SW</code>, <code>RESET_SW</code>, <code>PWR_LED+/-</code>, <code>HDD_LED+/-</code>, <code>SPEAKER</code><br>Consulta siempre el manual de la placa.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <strong>IES Valle del Jerte</strong> &nbsp;·&nbsp; Montaje y Mantenimiento de Equipos &nbsp;·&nbsp; Tema 5: Conectores y Cableado &nbsp;·&nbsp; 2024-2025
+</footer>
+
+</body>
+</html>

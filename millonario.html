@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Quién quiere ser millonario? · MME Tema 5</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --gold:#ffd700;--gold2:#ffaa00;--dark:#04041a;--dark2:#0a0a30;
+      --blue1:#0b1a6a;--blue2:#1a3aaa;--correct:#0a5a20;--correct2:#1a8a38;
+      --wrong:#5a0a0a;--wrong2:#8a1a1a;--text:#e8e8ff;
+    }
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:radial-gradient(ellipse at 30% 20%,#0d1150,var(--dark) 70%);min-height:100vh;color:var(--text);overflow-x:hidden;}
+
+    /* ── Screens ── */
+    .screen{display:none;min-height:100vh;}
+    .screen.active{display:flex;}
+
+    /* ── START SCREEN ── */
+    #start-screen{flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;gap:1.5rem;}
+    .game-logo{font-size:clamp(1.8rem,5vw,3.2rem);font-weight:900;background:linear-gradient(135deg,var(--gold),#ffcc00,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:1px;line-height:1.2;}
+    .game-logo-small{font-size:clamp(0.95rem,2vw,1.2rem);color:#99aacc;margin-top:0.3rem;}
+    .rules-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,215,0,0.25);border-radius:16px;padding:1.8rem 2rem;max-width:580px;text-align:left;}
+    .rules-card h3{color:var(--gold);margin-bottom:1rem;font-size:1.1rem;text-align:center;letter-spacing:1px;}
+    .rules-card ul{list-style:none;}
+    .rules-card li{padding:0.35rem 0 0.35rem 1.6rem;position:relative;color:#ccd;font-size:0.95rem;}
+    .rules-card li::before{content:'◆';position:absolute;left:0;color:var(--gold);font-size:0.7rem;top:0.55rem;}
+    .lifeline-legend{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:0.5rem;}
+    .ll-item{display:flex;align-items:center;gap:0.4rem;font-size:0.85rem;color:#aab;}
+    .btn-start{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border:none;padding:1rem 3.5rem;font-size:1.3rem;font-weight:900;border-radius:50px;cursor:pointer;transition:all 0.3s;letter-spacing:2px;text-transform:uppercase;box-shadow:0 4px 20px rgba(255,215,0,0.3);}
+    .btn-start:hover{transform:scale(1.06);box-shadow:0 6px 35px rgba(255,215,0,0.5);}
+
+    /* ── GAME SCREEN ── */
+    #game-screen{flex-direction:column;}
+    .game-header{display:flex;align-items:center;justify-content:space-between;padding:0.7rem 1.5rem;background:rgba(0,0,0,0.5);border-bottom:1px solid rgba(255,215,0,0.15);flex-shrink:0;}
+    .game-title{font-size:1rem;font-weight:700;color:var(--gold);}
+    .game-score{font-size:0.85rem;color:#aab;}
+    .btn-reset{background:transparent;border:1px solid rgba(255,255,255,0.2);color:#aaa;padding:0.35rem 0.9rem;border-radius:20px;cursor:pointer;font-size:0.8rem;transition:all 0.2s;}
+    .btn-reset:hover{border-color:var(--gold);color:var(--gold);}
+    .game-main{display:flex;flex:1;min-height:0;}
+
+    /* ── QUESTION AREA ── */
+    #question-area{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.2rem 1.5rem;min-width:0;gap:0.8rem;}
+    #question-image{max-height:210px;max-width:min(500px,100%);border-radius:12px;border:2px solid rgba(255,215,0,0.25);display:none;object-fit:contain;box-shadow:0 4px 20px rgba(0,0,0,0.5);}
+    #question-image.visible{display:block;}
+    .question-number{font-size:0.78rem;color:#888;letter-spacing:2px;text-transform:uppercase;}
+    #question-text{font-size:clamp(0.95rem,2.2vw,1.25rem);font-weight:600;text-align:center;max-width:680px;line-height:1.55;}
+    .options-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.65rem;width:100%;max-width:680px;}
+    .option-btn{background:linear-gradient(135deg,rgba(11,26,106,0.85),rgba(26,58,170,0.85));border:2px solid rgba(100,150,255,0.35);color:#e8e8ff;padding:0.75rem 1rem;border-radius:50px;cursor:pointer;font-size:clamp(0.78rem,1.8vw,0.98rem);font-weight:500;transition:background 0.15s,border-color 0.15s,transform 0.15s;text-align:left;display:flex;align-items:center;gap:0.7rem;}
+    .option-btn:hover:not(:disabled){background:linear-gradient(135deg,rgba(20,55,180,0.9),rgba(40,90,210,0.9));border-color:rgba(200,220,255,0.55);transform:scale(1.025);}
+    .option-btn:disabled{cursor:default;}
+    .option-label{font-weight:900;color:var(--gold);min-width:1.4rem;font-size:1rem;}
+    .option-btn.selected{background:linear-gradient(135deg,#1a3a7a,#2a5aaa);border-color:#7aafff;}
+    .option-btn.correct{background:linear-gradient(135deg,var(--correct),var(--correct2))!important;border-color:#4aff7a!important;animation:correctPulse 0.6s;}
+    .option-btn.wrong{background:linear-gradient(135deg,var(--wrong),var(--wrong2))!important;border-color:#ff5555!important;}
+    .option-btn.eliminated{opacity:0.12;pointer-events:none;}
+    @keyframes correctPulse{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
+
+    /* ── LIFELINES ── */
+    .lifelines{display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;}
+    .lifeline-btn{background:rgba(255,255,255,0.07);border:2px solid rgba(255,215,0,0.35);color:var(--gold);padding:0.5rem 1.1rem;border-radius:50px;cursor:pointer;font-size:0.85rem;font-weight:700;transition:all 0.2s;display:flex;align-items:center;gap:0.4rem;}
+    .lifeline-btn:hover:not(:disabled){background:rgba(255,215,0,0.18);border-color:var(--gold);}
+    .lifeline-btn:disabled{opacity:0.25;cursor:not-allowed;border-color:#444;color:#555;}
+
+    /* ── PRIZE LADDER ── */
+    #prize-ladder{width:200px;min-width:200px;background:rgba(0,0,0,0.45);border-left:1px solid rgba(255,215,0,0.15);display:flex;flex-direction:column;justify-content:center;padding:0.5rem 0;overflow-y:auto;}
+    .prize-item{display:flex;align-items:center;justify-content:space-between;padding:0.28rem 0.9rem;font-size:0.78rem;color:#667;transition:all 0.3s;border-left:3px solid transparent;}
+    .prize-item .prize-num{min-width:1.6rem;font-weight:600;}
+    .prize-item.current{background:linear-gradient(90deg,rgba(255,215,0,0.12),rgba(255,215,0,0.04),transparent);color:var(--gold);font-weight:800;font-size:0.9rem;border-left-color:var(--gold);}
+    .prize-item.checkpoint{border-top:1px solid rgba(255,215,0,0.2);border-bottom:1px solid rgba(255,215,0,0.2);}
+    .prize-item.earned{color:#5f5;}
+    .guarantee-icon{font-size:0.65rem;color:var(--gold);}
+
+    /* ── MODAL ── */
+    #modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:200;align-items:center;justify-content:center;}
+    #modal-overlay.active{display:flex;}
+    .modal-box{background:linear-gradient(135deg,#080826,#121250);border:2px solid rgba(255,215,0,0.4);border-radius:20px;padding:2rem;max-width:480px;width:92%;text-align:center;}
+    .modal-box h3{color:var(--gold);font-size:1.2rem;margin-bottom:1rem;}
+    .modal-text{color:#ccd;line-height:1.6;margin-bottom:1.4rem;font-size:0.97rem;}
+    .audience-bars{display:flex;justify-content:space-around;align-items:flex-end;height:130px;margin:1rem 0;gap:0.5rem;}
+    .bar-item{display:flex;flex-direction:column;align-items:center;flex:1;}
+    .bar-fill{width:85%;background:linear-gradient(180deg,var(--gold),var(--gold2));border-radius:4px 4px 0 0;}
+    .bar-letter{font-weight:800;color:var(--gold);margin-top:0.3rem;font-size:0.9rem;}
+    .bar-pct{color:#999;font-size:0.72rem;}
+    .btn-close-modal{background:rgba(255,215,0,0.15);border:1px solid var(--gold);color:var(--gold);padding:0.55rem 1.5rem;border-radius:20px;cursor:pointer;font-size:0.9rem;transition:all 0.2s;}
+    .btn-close-modal:hover{background:rgba(255,215,0,0.28);}
+
+    /* ── END SCREEN ── */
+    #end-screen{flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;gap:1rem;position:relative;}
+    #end-title{font-size:clamp(1.8rem,5vw,2.8rem);font-weight:900;line-height:1.2;}
+    .end-win #end-title{background:linear-gradient(135deg,var(--gold),#ffcc00,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .end-lose #end-title{color:#ff5555;}
+    #end-message{font-size:1.05rem;color:#ccd;max-width:520px;line-height:1.6;}
+    .btn-prize{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border:none;padding:0.9rem 2.5rem;font-size:1.1rem;font-weight:900;border-radius:50px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;}
+    .btn-prize:hover{transform:scale(1.06);box-shadow:0 6px 30px rgba(255,215,0,0.45);}
+    .btn-retry{background:transparent;color:#999;border:1px solid #444;padding:0.6rem 1.8rem;font-size:0.95rem;border-radius:50px;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block;}
+    .btn-retry:hover{border-color:#aaa;color:#fff;}
+
+    /* ── CONFETTI ── */
+    #confetti-canvas{position:fixed;inset:0;pointer-events:none;z-index:100;}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:720px){
+      #prize-ladder{display:none;}
+      .options-grid{grid-template-columns:1fr;}
+    }
+    @media(max-width:480px){
+      .game-header{padding:0.5rem 1rem;}
+      #question-area{padding:1rem;}
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<!-- MODAL -->
+<div id="modal-overlay">
+  <div class="modal-box">
+    <h3 id="modal-title">Comodín</h3>
+    <div id="modal-content" class="modal-text"></div>
+    <button class="btn-close-modal" onclick="closeModal()">Cerrar</button>
+  </div>
+</div>
+
+<!-- ════════════════ START SCREEN ════════════════ -->
+<div id="start-screen" class="screen active">
+  <div>
+    <div class="game-logo">¿Quién quiere ser millonario?</div>
+    <div class="game-logo-small">Tema 5: Conectores y Cableado &nbsp;·&nbsp; MME 2024-2025 &nbsp;·&nbsp; IES Valle del Jerte</div>
+  </div>
+
+  <div class="rules-card">
+    <h3>📋 CÓMO JUGAR</h3>
+    <ul>
+      <li>15 preguntas de dificultad creciente sobre conectores y puertos</li>
+      <li>Muchas preguntas muestran imágenes reales para identificar</li>
+      <li>Elige la respuesta correcta entre 4 opciones (A, B, C, D)</li>
+      <li>Las preguntas 5 y 10 son <strong style="color:var(--gold)">puntos de salvavidas ★</strong> garantizados</li>
+      <li>Usa tus 3 comodines con sabiduría: ¡solo puedes usarlos una vez!</li>
+      <li>Llega al millón y desbloquea tu <strong style="color:var(--gold)">recompensa</strong> 🏆</li>
+    </ul>
+    <div class="lifeline-legend" style="margin-top:1rem;">
+      <span class="ll-item">50:50 — Elimina 2 opciones erróneas</span>
+      <span class="ll-item">·</span>
+      <span class="ll-item">📞 Llamada — Consejo de un amigo</span>
+      <span class="ll-item">·</span>
+      <span class="ll-item">👥 Público — El público vota</span>
+    </div>
+  </div>
+
+  <button class="btn-start" onclick="startGame()">¡ COMENZAR !</button>
+  <a href="index.html" style="color:#667;font-size:0.85rem;text-decoration:none;">← Volver al portal</a>
+</div>
+
+<!-- ════════════════ GAME SCREEN ════════════════ -->
+<div id="game-screen" class="screen">
+
+  <div class="game-header">
+    <div class="game-title">🔌 MME Tema 5 · Conectores</div>
+    <div class="game-score" id="header-score">100 pts garantizados</div>
+    <button class="btn-reset" onclick="resetGame()">↺ Reiniciar</button>
+  </div>
+
+  <div class="game-main">
+
+    <!-- Question + options + lifelines -->
+    <div id="question-area">
+      <img id="question-image" src="" alt="Imagen de la pregunta">
+      <div class="question-number" id="question-number">PREGUNTA 1 DE 15</div>
+      <div id="question-text">Cargando...</div>
+      <div class="options-grid" id="options-grid"></div>
+      <div class="lifelines">
+        <button class="lifeline-btn" id="ll-50" onclick="use5050()">50:50</button>
+        <button class="lifeline-btn" id="ll-call" onclick="useCall()">📞 Llamada</button>
+        <button class="lifeline-btn" id="ll-audience" onclick="useAudience()">👥 Público</button>
+      </div>
+    </div>
+
+    <!-- Prize ladder -->
+    <div id="prize-ladder"></div>
+
+  </div>
+</div>
+
+<!-- ════════════════ END SCREEN ════════════════ -->
+<div id="end-screen" class="screen">
+  <div id="end-title">Fin del juego</div>
+  <div id="end-message"></div>
+  <div id="end-buttons" style="display:flex;flex-direction:column;align-items:center;gap:0.8rem;margin-top:1rem;"></div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script>
+// ═══════════════════════════════════════════
+//  DATA
+// ═══════════════════════════════════════════
+const PRIZES = [100,200,300,500,1000,2000,4000,8000,16000,32000,64000,125000,250000,500000,1000000];
+const CHECKPOINTS = [4, 9]; // Q5 y Q10 (índice base 0)
+const LETTERS = ['A','B','C','D'];
+
+const QUESTIONS = [
+  // ─ Q1 Muy fácil ─
+  {
+    // FIX: eliminado "teclados y ratones" del enunciado; ahora el alumno debe reconocer el conector por la imagen
+    pregunta:"¿Cuál es la función del conector mostrado en la imagen? Fíjate en su forma circular y en que aparece en dos colores distintos según el dispositivo que conecta.",
+    imagen:"images/PS2.jpg",
+    opciones:["USB tipo A — conexión de periféricos modernos","PS/2 — entrada de teclado o ratón","Jack 3,5 mm — audio analógico","RJ-11 — línea telefónica"],
+    correcta:1
+  },
+  // ─ Q2 Fácil ─
+  {
+    // FIX: eliminado "vídeo analógico" del enunciado
+    pregunta:"¿Cómo se denomina el conector de 15 pines mostrado en la imagen?",
+    imagen:"images/vga.jpg",
+    opciones:["DVI-I (conectores de 24+5 pines)","VGA — D-Sub de 15 pines","DisplayPort 1.4 (conector plano)","S-Video (conector de 4 pines)"],
+    correcta:1
+  },
+  // ─ Q3 Fácil ─
+  {
+    // FIX: eliminado "se usa en redes Ethernet" del enunciado; ahora se pide identificar el conector grande
+    pregunta:"La imagen muestra dos conectores de apariencia similar pero diferente tamaño. ¿Cuántos pines tiene el conector MÁS GRANDE y cómo se llama?",
+    imagen:"images/rj45vsrj11.jpg",
+    opciones:["6 pines — RJ-11","8 pines — RJ-45","9 pines — DE-9 (puerto serie)","4 pines — RJ-9"],
+    correcta:1
+  },
+  // ─ Q4 Fácil ─
+  {
+    // FIX: eliminado "reversible" y "modernos" como pistas; la imagen debe hablar por sí sola
+    pregunta:"La imagen muestra varios tipos de conectores USB. ¿Cuál de ellos ha sido adoptado como estándar universal en la mayoría de dispositivos portátiles actuales?",
+    imagen:"images/usbs.png",
+    opciones:["USB tipo A (el rectangular clásico)","USB tipo B (el cuadrado de impresoras)","Micro-USB tipo B","USB tipo C"],
+    correcta:3
+  },
+  // ─ Q5 Media · SALVAVIDAS ─
+  {
+    // FIX: el enunciado anterior decía implícitamente "audio y vídeo"; ahora pregunta cuántos tipos de señal
+    pregunta:"El conector de la imagen es el más extendido para enlazar fuentes de vídeo con pantallas. ¿Cuántos tipos de señal distintos puede transportar simultáneamente en un único cable?",
+    imagen:"images/hdmi.jpg",
+    opciones:["Solo uno — únicamente vídeo digital","Dos — vídeo digital más control remoto CEC","Dos — audio digital y vídeo digital","Tres — audio, vídeo y alimentación eléctrica"],
+    correcta:2
+  },
+  // ─ Q6 Media ─
+  {
+    // FIX: eliminado "impresoras de agujas" del enunciado
+    pregunta:"¿Cómo se denomina el conector de 25 pines mostrado en la imagen?",
+    imagen:"images/paralelo.jpg",
+    opciones:["Puerto serie DB-25 (RS-232 ampliado)","Puerto paralelo LPT (IEEE 1284)","Conector SCSI-1 para dispositivos externos","Conector DA-15 para joystick analógico"],
+    correcta:1
+  },
+  // ─ Q7 Media ─
+  {
+    // FIX: ELIMINADA la explicación "TRRS: Tip·Ring·Ring·Sleeve" que era la respuesta completa
+    pregunta:"Observa el número de bandas aislantes (anillos negros) del conector Jack de la imagen. ¿Para qué tipo de dispositivo indica esa configuración que está diseñado?",
+    imagen:"images/jackmicro.png",
+    opciones:["Altavoces estéreo pasivos (sin micrófono)","Auriculares con micrófono integrado (manos libres)","Guitarra o bajo eléctrico (jack mono)","Salida digital óptica S/PDIF"],
+    correcta:1
+  },
+  // ─ Q8 Media-Alta ─
+  {
+    // FIX: el enunciado anterior describía MST literalmente; ahora describe el escenario y pregunta el nombre
+    pregunta:"Un técnico quiere conectar 3 monitores en cadena desde una única salida de la GPU, sin ningún switch de vídeo externo. ¿Qué tecnología exclusiva de DisplayPort lo hace posible?",
+    imagen:"images/displayport.png",
+    opciones:["eARC — Enhanced Audio Return Channel","MST — Multi-Stream Transport","VRR — Variable Refresh Rate","DPCP — DisplayPort Content Protection"],
+    correcta:1
+  },
+  // ─ Q9 Alta ─
+  {
+    pregunta:"Para un enlace de fibra óptica entre dos edificios separados 5 km, ¿qué tipo de fibra es el técnicamente correcto?",
+    imagen:"images/fibra.png",
+    opciones:["Multimodo OM4 — núcleo 50 µm (distancia máx. ~550 m)","Plástica POF — para instalaciones domésticas (&lt;50 m)","Monomodo OS2 — núcleo 9 µm (apta para kilómetros)","Coaxial RG-6 — señal de satélite/cable TV"],
+    correcta:2
+  },
+  // ─ Q10 Alta · SALVAVIDAS ─
+  {
+    pregunta:"¿Cuántos pines tiene el conector principal de alimentación ATX moderno que conecta la fuente de alimentación a la placa base?",
+    imagen:"images/fuentealimentacion.jpg",
+    opciones:["20 pines (ATX original, año 1995)","24 pines (ATX estándar actual)","8 pines (conector EPS exclusivo para CPU)","12 pines (12VHPWR para GPUs)"],
+    correcta:1
+  },
+  // ─ Q11 Difícil ─
+  {
+    pregunta:"¿Qué versión de HDMI fue la primera en soportar nativamente 4K a 120 Hz, tasa de refresco variable (VRR) y canal de audio mejorado (eARC)?",
+    imagen:null,
+    opciones:["HDMI 1.4 (2009)","HDMI 2.0b (2016)","HDMI 2.1 (2017)","HDMI 3.0 (no existe aún)"],
+    correcta:2
+  },
+  // ─ Q12 Difícil ─
+  {
+    // FIX: eliminado "ZigBee (IEEE 802.15.4)" del enunciado; el alumno debe deducir el protocolo por sus características
+    pregunta:"El módulo de la imagen implementa un protocolo inalámbrico de corto alcance diseñado específicamente para redes de sensores. ¿Cuál de estas afirmaciones describe MEJOR su uso típico?",
+    imagen:"images/zigbee.jpg",
+    opciones:["Comunicaciones 5G de alta velocidad para smartphones","Redes de sensores, IoT y domótica de muy bajo consumo eléctrico","Punto de acceso Wi-Fi para streaming de vídeo 4K","Receptor GPS de alta precisión para navegación en exteriores"],
+    correcta:1
+  },
+  // ─ Q13 Muy difícil ─
+  {
+    // FIX CRÍTICO: el enunciado anterior contenía la respuesta "(header de 19 pines)"
+    pregunta:"¿Cuántos pines activos tiene el header USB 3.0 interno de la placa base que proporciona señal a los puertos USB del panel frontal del chasis?",
+    imagen:null,
+    opciones:["9 pines (es el header USB 2.0 interno)","14 pines","19 pines","24 pines (conector USB-C frontal de 20 pines)"],
+    correcta:2
+  },
+  // ─ Q14 Muy difícil ─
+  {
+    pregunta:"Un SSD NVMe M.2 con interfaz PCIe Gen 5 x4 alcanza velocidades de lectura secuencial de aproximadamente:",
+    imagen:null,
+    opciones:["~3,5 GB/s (PCIe 3.0 x4)","~7 GB/s (PCIe 4.0 x4)","~14 GB/s (PCIe 5.0 x4)","~28 GB/s (PCIe 6.0 x4, en desarrollo)"],
+    correcta:2
+  },
+  // ─ Q15 ¡EL MILLÓN! ─
+  {
+    pregunta:"🏆 ¡PREGUNTA DEL MILLÓN! En el estándar T568B, ¿qué colores ocupan los pines 1 y 2 del conector RJ-45?",
+    imagen:null,
+    opciones:["Blanco-Verde / Verde","Blanco-Naranja / Naranja","Blanco-Azul / Azul","Blanco-Marrón / Marrón"],
+    correcta:1
+  }
+];
+
+// Pistas para la "Llamada a un amigo" (siempre correctas, con humor)
+const CALL_HINTS = [
+  "Tu amigo dice: '¡PS/2, la B! El redondito morado ese que nunca encajaba bien… ¡lo recuerdo perfectamente!'",
+  "Tu amigo responde: 'La B sin dudar. VGA, el trapecio azul con 15 patitas. Lo vendo en el rastro cada dos por tres.'",
+  "Tu amigo lo tiene claro: 'El RJ-45 es el gordo, la B, tiene 8 pines. El RJ-11 es el del teléfono, más estrecho. Básico.'",
+  "Tu amigo dice: '¡USB-C, la D! El ovalo ese que por fin se conecta del revés. Ya era hora, oye.'",
+  "Tu amigo responde: 'El HDMI lleva audio y vídeo junto, la C. Lo sé porque monté mi tele yo solo, sin manual.'",
+  "Tu amigo técnico dice: 'Eso es el puerto paralelo, la B, 25 pines. Tenía una impresora de esas y era un dolor conectarla.'",
+  "Tu amigo dice: 'El TRRS es auriculares con micro en uno, la B. Lo uso para las videollamadas, funciona genial.'",
+  "Tu amigo (3 monitores en casa) dice: 'MST de DisplayPort, la B. Sin eso no podría tener los tres monitores en cadena.'",
+  "Tu amigo responde: 'Monomodo para larga distancia, la C. Con la multimodo llegas a 550 metros como mucho. Básico del CFGS.'",
+  "Tu amigo dice: '24 pines, la B. Si no conectas eso la placa no arranca ni en broma. Lo básico del montaje.'",
+  "Tu amigo (tiene PS5) dice: 'HDMI 2.1, la C. La 2.0 se queda en 4K@60Hz. Para 4K@120Hz necesitas la 2.1, te lo juro.'",
+  "Tu amigo del trabajo dice: 'ZigBee es para IoT y domótica, la B. Usamos sensores ZigBee en la fábrica para todo.'",
+  "Tu amigo técnico responde: '19 pines es el USB 3.0 header, la C. El de 9 pines es el USB 2.0. Se me han quemado algunos montándolos mal.'",
+  "Tu amigo friki del hardware dice: '~14 GB/s para PCIe 5.0 x4, la C. La 4.0 llega a ~7 GB/s. El doble de generación en generación.'",
+  "Tu amigo responde: 'T568B: pines 1-2 van blanco-naranja y naranja, la B. ¡Me lo sé de memoria de cuando hice el CFGM!'",
+];
+
+// ═══════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════
+let currentQ = 0;
+let guaranteedAmt = 0;
+let lifelinesUsed = {fifty:false, call:false, audience:false};
+let eliminatedOpts = [];
+let waitingReveal = false;
+let confettiId = null;
+
+// ═══════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════
+function startGame(){
+  document.getElementById('start-screen').classList.remove('active');
+  document.getElementById('game-screen').classList.add('active');
+  buildPrizeLadder();
+  loadQuestion(0);
+}
+
+function resetGame(){
+  currentQ = 0;
+  guaranteedAmt = 0;
+  lifelinesUsed = {fifty:false, call:false, audience:false};
+  eliminatedOpts = [];
+  waitingReveal = false;
+  stopConfetti();
+
+  ['ll-50','ll-call','ll-audience'].forEach(id=>{
+    document.getElementById(id).disabled = false;
+  });
+
+  document.getElementById('end-screen').classList.remove('active','end-win','end-lose');
+  document.getElementById('game-screen').classList.add('active');
+  buildPrizeLadder();
+  loadQuestion(0);
+}
+
+// ═══════════════════════════════════════════
+//  PRIZE LADDER
+// ═══════════════════════════════════════════
+function fmt(n){ return n>=1000000?'1.000.000 pts':n.toLocaleString('es-ES')+' pts'; }
+
+function buildPrizeLadder(){
+  const ladder = document.getElementById('prize-ladder');
+  ladder.innerHTML = '';
+  for(let i = PRIZES.length-1; i >= 0; i--){
+    const div = document.createElement('div');
+    div.className = 'prize-item' + (CHECKPOINTS.includes(i)?' checkpoint':'');
+    div.id = 'pz'+i;
+    div.innerHTML = `<span class="prize-num">${i+1}.</span><span>${fmt(PRIZES[i])}</span>${CHECKPOINTS.includes(i)?'<span class="guarantee-icon">★</span>':''}`;
+    ladder.appendChild(div);
+  }
+  updateLadder();
+}
+
+function updateLadder(){
+  for(let i=0;i<PRIZES.length;i++){
+    const el = document.getElementById('pz'+i);
+    if(!el) continue;
+    el.classList.remove('current','earned');
+    if(i===currentQ) el.classList.add('current');
+    else if(i<currentQ) el.classList.add('earned');
+  }
+  const score = guaranteedAmt ? fmt(guaranteedAmt) : '0 pts';
+  document.getElementById('header-score').textContent = score+' garantizados';
+}
+
+// ═══════════════════════════════════════════
+//  LOAD QUESTION
+// ═══════════════════════════════════════════
+function loadQuestion(idx){
+  if(idx >= QUESTIONS.length){ showWin(); return; }
+  currentQ = idx;
+  eliminatedOpts = [];
+  waitingReveal = false;
+  updateLadder();
+
+  const q = QUESTIONS[idx];
+  document.getElementById('question-number').textContent = `PREGUNTA ${idx+1} DE 15`;
+  document.getElementById('question-text').textContent = q.pregunta;
+
+  const img = document.getElementById('question-image');
+  if(q.imagen){
+    img.src = q.imagen;
+    img.classList.add('visible');
+    img.onerror = ()=>img.classList.remove('visible');
+  } else {
+    img.classList.remove('visible');
+    img.src='';
+  }
+
+  const grid = document.getElementById('options-grid');
+  grid.innerHTML = '';
+  q.opciones.forEach((opt,i)=>{
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.id = 'opt'+i;
+    btn.innerHTML = `<span class="option-label">${LETTERS[i]}</span><span>${opt}</span>`;
+    btn.onclick = ()=>selectAnswer(i);
+    grid.appendChild(btn);
+  });
+}
+
+// ═══════════════════════════════════════════
+//  ANSWER SELECTION
+// ═══════════════════════════════════════════
+function selectAnswer(chosen){
+  if(waitingReveal) return;
+  waitingReveal = true;
+
+  const q = QUESTIONS[currentQ];
+  const btns = document.querySelectorAll('.option-btn');
+  btns.forEach(b=>b.disabled=true);
+  btns[chosen].classList.add('selected');
+
+  setTimeout(()=>{
+    const correct = q.correcta;
+    if(chosen === correct){
+      btns[chosen].classList.remove('selected');
+      btns[chosen].classList.add('correct');
+      if(CHECKPOINTS.includes(currentQ)) guaranteedAmt = PRIZES[currentQ];
+      setTimeout(()=>{
+        if(currentQ+1 >= QUESTIONS.length) showWin();
+        else loadQuestion(currentQ+1);
+      }, 1600);
+    } else {
+      btns[chosen].classList.remove('selected');
+      btns[chosen].classList.add('wrong');
+      btns[correct].classList.add('correct');
+      setTimeout(()=>showLose(chosen,correct), 2200);
+    }
+  }, 1800);
+}
+
+// ═══════════════════════════════════════════
+//  LIFELINES
+// ═══════════════════════════════════════════
+function use5050(){
+  if(lifelinesUsed.fifty || waitingReveal) return;
+  lifelinesUsed.fifty = true;
+  document.getElementById('ll-50').disabled = true;
+  const q = QUESTIONS[currentQ];
+  const wrong = [0,1,2,3].filter(i=>i!==q.correcta);
+  const remove = wrong.sort(()=>Math.random()-0.5).slice(0,2);
+  remove.forEach(i=>{
+    const b=document.getElementById('opt'+i);
+    if(b) b.classList.add('eliminated');
+  });
+  eliminatedOpts = remove;
+}
+
+function useCall(){
+  if(lifelinesUsed.call || waitingReveal) return;
+  lifelinesUsed.call = true;
+  document.getElementById('ll-call').disabled = true;
+  const hint = CALL_HINTS[currentQ] || "Tu amigo dice: '¡Yo confío en ti! Piénsalo bien...'";
+  document.getElementById('modal-title').textContent = '📞 Llamada a un amigo';
+  document.getElementById('modal-content').innerHTML = `<p style="font-style:italic;font-size:1.05rem;margin-bottom:0.8rem;">"${hint}"</p><p style="color:#888;font-size:0.82rem;">Tienes 30 segundos para decidir después de colgar.</p>`;
+  document.getElementById('modal-overlay').classList.add('active');
+}
+
+function useAudience(){
+  if(lifelinesUsed.audience || waitingReveal) return;
+  lifelinesUsed.audience = true;
+  document.getElementById('ll-audience').disabled = true;
+  const q = QUESTIONS[currentQ];
+
+  // Fabricar votos: la correcta obtiene 60-78%
+  const correctPct = Math.floor(60 + Math.random()*18);
+  let votes = [0,0,0,0];
+  votes[q.correcta] = correctPct;
+  const others = [0,1,2,3].filter(i=>i!==q.correcta && !eliminatedOpts.includes(i));
+  let left = 100 - correctPct;
+  others.forEach((o,k)=>{
+    const v = k===others.length-1 ? left : Math.floor(Math.random()*left*0.6);
+    votes[o]=v; left-=v;
+  });
+
+  const barsHtml = [0,1,2,3].map(i=>{
+    if(eliminatedOpts.includes(i)) return '';
+    const h = Math.max(votes[i],2);
+    return `<div class="bar-item"><div class="bar-fill" style="height:${h}%"></div><div class="bar-letter">${LETTERS[i]}</div><div class="bar-pct">${votes[i]}%</div></div>`;
+  }).join('');
+
+  document.getElementById('modal-title').textContent = '👥 El público ha votado';
+  document.getElementById('modal-content').innerHTML = `<div class="audience-bars">${barsHtml}</div>`;
+  document.getElementById('modal-overlay').classList.add('active');
+}
+
+function closeModal(){
+  document.getElementById('modal-overlay').classList.remove('active');
+}
+
+// ═══════════════════════════════════════════
+//  END SCREENS
+// ═══════════════════════════════════════════
+function showWin(){
+  document.getElementById('game-screen').classList.remove('active');
+  const es = document.getElementById('end-screen');
+  es.classList.add('active','end-win');
+  document.getElementById('end-title').textContent = '🏆 ¡1.000.000 DE PUNTOS!';
+  document.getElementById('end-message').innerHTML = `
+    ¡Enhorabuena! Has demostrado ser un/a experto/a en conectores y cableado.<br>
+    <strong style="color:var(--gold)">Has desbloqueado tu recompensa: 40 preguntas de práctica.</strong><br>
+    <span style="font-size:0.88rem;color:#99aacc;">Ábrelas, estudia y usa «Imprimir» del navegador para guardarlo como PDF.</span>
+  `;
+  document.getElementById('end-buttons').innerHTML = `
+    <a href="preguntas.html" target="_blank" class="btn-prize">🎁 Ver mi recompensa (40 preguntas)</a>
+    <button class="btn-retry" onclick="resetGame()">↺ Jugar de nuevo</button>
+  `;
+  launchConfetti();
+}
+
+function showLose(chosen, correct){
+  document.getElementById('game-screen').classList.remove('active');
+  const es = document.getElementById('end-screen');
+  es.classList.add('active','end-lose');
+  const q = QUESTIONS[currentQ];
+  const guar = guaranteedAmt ? fmt(guaranteedAmt) : '0 pts';
+  document.getElementById('end-title').textContent = '❌ ¡Respuesta incorrecta!';
+  document.getElementById('end-message').innerHTML = `
+    Elegiste la opción <strong>${LETTERS[chosen]}</strong>, pero la respuesta correcta era:<br>
+    <strong style="color:#5f5">${LETTERS[correct]}: ${q.opciones[correct]}</strong><br><br>
+    Tu bote garantizado era: <strong style="color:var(--gold)">${guar}</strong><br>
+    <span style="font-size:0.9rem;color:#99aacc;">¡Sigue practicando, seguro que la próxima lo consigues!</span>
+  `;
+  document.getElementById('end-buttons').innerHTML = `
+    <button class="btn-prize" onclick="resetGame()">↺ Intentarlo de nuevo</button>
+    <a href="preguntas.html" target="_blank" class="btn-retry">Ver las 40 preguntas de estudio</a>
+  `;
+}
+
+// ═══════════════════════════════════════════
+//  CONFETTI
+// ═══════════════════════════════════════════
+function launchConfetti(){
+  const canvas = document.getElementById('confetti-canvas');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const ctx = canvas.getContext('2d');
+  const colors = ['#ffd700','#ff6b6b','#51cf66','#74c0fc','#f06595','#fff','#ffcc44'];
+  const particles = Array.from({length:160},()=>({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height - canvas.height,
+    w:Math.random()*11+4, h:Math.random()*6+3,
+    color:colors[Math.floor(Math.random()*colors.length)],
+    angle:Math.random()*Math.PI*2,
+    spin:(Math.random()-0.5)*0.18,
+    vy:Math.random()*3+1.5,
+    vx:(Math.random()-0.5)*1.8
+  }));
+  let running = true;
+  function frame(){
+    if(!running){ ctx.clearRect(0,0,canvas.width,canvas.height); return; }
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.angle);
+      ctx.fillStyle=p.color; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      ctx.restore();
+      p.y+=p.vy; p.x+=p.vx; p.angle+=p.spin;
+      if(p.y>canvas.height){ p.y=-p.h; p.x=Math.random()*canvas.width; }
+    });
+    confettiId = requestAnimationFrame(frame);
+  }
+  frame();
+  setTimeout(()=>{ running=false; }, 6000);
+}
+
+function stopConfetti(){
+  if(confettiId){ cancelAnimationFrame(confettiId); confettiId=null; }
+  const canvas = document.getElementById('confetti-canvas');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+}
+</script>
+</body>
+</html>

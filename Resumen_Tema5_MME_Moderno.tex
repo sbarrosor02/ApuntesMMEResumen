@@ -1,0 +1,1090 @@
+\documentclass[a4paper,11pt]{article}
+
+% ── Codificación y idioma ──
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+
+% ── Diseño de página ──
+\usepackage[margin=2.2cm]{geometry}
+
+% ── Tipografía ──
+\usepackage{lmodern}
+
+% ── Imágenes ──
+\usepackage{graphicx}
+\graphicspath{{images/}}
+
+% ── Tablas y listas ──
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{float}
+
+% ── Símbolos ──
+\usepackage{marvosym}   % para \Lightning
+
+% ── Colores y cajas ──
+\usepackage[table,dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+
+% ── Títulos ──
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries\color{MidnightBlue}}{\thesection}{1em}{}[\titlerule[0.8pt]]
+\titleformat{\subsection}{\normalfont\large\bfseries\color{RoyalBlue}}{\thesubsection}{1em}{}
+
+% ── Hipervínculos ──
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=MidnightBlue, urlcolor=RoyalBlue}
+
+% ── Encabezados y pies de página ──
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{gray}{Tema 5 --- Conectores y Cableado (Resumen)}}
+\fancyhead[R]{\small\textcolor{gray}{MME --- Curso 2024--2025}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ── Cajas personalizadas ──
+\newtcolorbox{infobox}[1][]{
+  colback=blue!5, colframe=MidnightBlue, fonttitle=\bfseries,
+  title=#1, breakable, boxrule=0.5pt, arc=2mm
+}
+\newtcolorbox{warnbox}[1][]{
+  colback=orange!8, colframe=BurntOrange, fonttitle=\bfseries,
+  title=#1, breakable, boxrule=0.5pt, arc=2mm
+}
+\newtcolorbox{keybox}[1][]{
+  colback=green!5, colframe=OliveGreen, fonttitle=\bfseries,
+  title=#1, breakable, boxrule=0.5pt, arc=2mm
+}
+
+% ══════════════════════════════════════════════════════════════════
+\title{%
+  \textbf{Tema 5: Conectores y Cableado}\\[4pt]
+  \Large Resumen orientado a conectores actuales\\[6pt]
+  \large Montaje y Mantenimiento de Equipos\\
+  Ciclo Formativo de Grado Medio --- Curso 2024--2025\\
+  \normalsize I.E.S.\ Valle del Jerte
+}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+% ══════════════════════════════════════════════════════════════════
+\begin{keybox}[Objetivo de este resumen]
+Este documento condensa el Tema~5 centrándose en los \textbf{conectores y cableados que se utilizan actualmente} en equipos informáticos. Los conectores obsoletos (puerto serie, paralelo, PS/2, VGA, DVI, IDE, FireWire\ldots) se mencionan brevemente en la sección final a modo de contexto histórico, pero el estudio se enfoca en las interfaces que encontrarás montando y manteniendo equipos hoy en día.
+\end{keybox}
+
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════════════
+\section{Conceptos básicos de conectividad}
+% ══════════════════════════════════════════════════════════════════
+
+\subsection{Pines y contactos}
+La conexión entre un puerto (en la placa base o tarjeta de expansión) y un conector (en el cable) se realiza mediante \textbf{pines}: patillas metálicas que establecen contacto eléctrico. Cada pin transporta una señal concreta (datos, alimentación, masa, reloj, etc.).
+
+\subsection{Formatos macho y hembra}
+\begin{itemize}[nosep]
+  \item \textbf{Macho (M):} los pines sobresalen y se insertan en la parte hembra.
+  \item \textbf{Hembra (F):} dispone de orificios que reciben los pines macho.
+\end{itemize}
+Por regla general, los \emph{puertos} de los equipos son hembra y los \emph{conectores} de los cables son macho, aunque hay excepciones (por ejemplo, el puerto serie COM es macho).
+
+\subsection{Alargadores, adaptadores y hubs}
+\begin{itemize}[nosep]
+  \item \textbf{Alargador:} cable con un extremo macho y otro hembra del mismo tipo; extiende el alcance de un puerto.
+  \item \textbf{Adaptador:} transforma un tipo de conector en otro (p.~ej.\ DisplayPort a HDMI). Puede ser un dongle o llevar cable.
+  \item \textbf{Hub:} un único cable que ofrece varios puertos en el otro extremo (p.~ej.\ hub USB-C con HDMI + USB-A + Ethernet).
+\end{itemize}
+
+\subsection{Familias clásicas de conectores}
+
+Antes de estudiar los conectores actuales, conviene conocer las familias de conectores que han existido en informática, ya que su nomenclatura sigue apareciendo:
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.55\textwidth]{conectoresDIN}
+  \caption{Conectores DIN: de 3 a 8 pines, diámetro de 13,2~mm. Origen en la estandarización alemana.}
+  \label{fig:din}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.55\textwidth]{conectoresminidin}
+  \caption{Conectores Mini-DIN: versión reducida (9,5~mm), de 3 a 9 pines. El Mini-DIN~6 se utilizó para PS/2.}
+  \label{fig:minidin}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.55\textwidth]{conectoresDSUB}
+  \caption{Conectores D-Sub: carcasa metálica en forma de D con pines en filas. VGA (DE-15), serie (DE-9) y paralelo (DB-25) pertenecen a esta familia.}
+  \label{fig:dsub}
+\end{figure}
+
+
+% ══════════════════════════════════════════════════════════════════
+\section{USB (Universal Serial Bus)}
+\label{sec:usb}
+% ══════════════════════════════════════════════════════════════════
+
+El USB es, con diferencia, el \textbf{estándar de conectividad más importante en la actualidad}. Permite conectar prácticamente cualquier periférico: ratones, teclados, discos externos, impresoras, cámaras, smartphones, monitores\ldots{} y además puede proporcionar alimentación eléctrica.
+
+\subsection{Características clave del USB}
+\begin{itemize}
+  \item \textbf{Plug-and-Play:} el sistema operativo reconoce el dispositivo al conectarlo sin reiniciar (conexión \emph{en caliente}).
+  \item \textbf{Alimentación eléctrica:} proporciona energía a dispositivos de bajo consumo directamente por el cable, y con \textbf{USB Power Delivery (USB PD)} puede suministrar hasta 240~W (estándar USB PD 3.1).
+  \item \textbf{Topología en estrella:} mediante hubs se pueden conectar hasta 127 dispositivos en un mismo controlador.
+  \item \textbf{Compatibilidad hacia atrás:} un dispositivo USB~2.0 funciona en un puerto USB~3.x (a velocidad 2.0).
+\end{itemize}
+
+\subsection{Versiones y velocidades del USB}
+
+\begin{infobox}[Nota sobre la nomenclatura]
+El USB Implementers Forum (USB-IF) ha renombrado los estándares varias veces, generando confusión. En la tabla se incluyen los nombres más comunes y el nombre de marketing actual.
+\end{infobox}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries}l c c X}
+\toprule
+\textbf{Estándar} & \textbf{Nombre marketing} & \textbf{Velocidad máx.} & \textbf{Notas} \\
+\midrule
+USB 2.0        & USB 2.0        & 480 Mbps (60 MB/s)     & Aún presente en ratones, teclados y hubs baratos. \\
+USB 3.0 / 3.1 Gen~1 / 3.2 Gen~1 & USB 5Gbps & 5 Gbps (625 MB/s) & Puerto identificable por el \textbf{color azul} en USB-A. \\
+USB 3.1 Gen~2 / 3.2 Gen~2       & USB 10Gbps & 10 Gbps (1,25 GB/s) & Común en puertos USB-C de gama media-alta. \\
+USB 3.2 Gen~2x2                  & USB 20Gbps & 20 Gbps (2,5 GB/s) & Solo disponible en USB-C (usa dos carriles de datos). \\
+USB4 Gen~3x2  & USB4 40Gbps    & 40 Gbps (5 GB/s)       & Basado en Thunderbolt~3. Solo USB-C. \\
+USB4 v2.0     & USB4 80Gbps    & 80 Gbps (10 GB/s)      & La especificación más reciente (2022). Solo USB-C. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Tipos de conectores USB}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\textwidth]{ConectoresUSB}
+  \caption{Familia de conectores USB: Tipo-A, Tipo-B, Mini-USB, Micro-USB y USB-C en sus diferentes versiones.}
+  \label{fig:usb_conectores}
+\end{figure}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries}l c X}
+\toprule
+\textbf{Conector} & \textbf{Pines} & \textbf{Uso actual} \\
+\midrule
+USB Tipo-A       & 4 (2.0) / 9 (3.x) & Rectangular, no reversible. Sigue siendo el más común en PCs de sobremesa, portátiles y cargadores. Color azul = USB 3.x. \\
+USB Tipo-B       & 4 / 9             & Cuadrado con bordes biselados. Casi solo en impresoras y algún periférico profesional (interfaces de audio, etc.). En desuso progresivo. \\
+Micro-USB        & 5                 & Trapezoidal pequeño. Fue estándar en smartphones Android hasta $\sim$2018. Aún en dispositivos baratos (mandos, auriculares económicos). \\
+\textbf{USB Tipo-C}   & \textbf{24}  & \textbf{Conector moderno, ovalado y reversible.} Es el presente y futuro: datos, vídeo (DisplayPort Alt Mode), carga (USB PD) y audio, todo en uno. Obligatorio en la UE desde 2024 para dispositivos móviles. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\textwidth]{usbs}
+  \caption{Puertos USB en el panel trasero de una placa base: USB 2.0 (negro), USB 3.0 (azul) y USB-C.}
+  \label{fig:usb_puertos}
+\end{figure}
+
+\begin{warnbox}[Cuidado: aspecto $\neq$ velocidad]
+Un cable con conector USB-C no implica que sea USB~3.x o USB4. El \textbf{tipo de conector} (forma física) es independiente del \textbf{estándar/velocidad}. Existen cables USB-C que solo soportan USB~2.0 (480~Mbps). Es fundamental verificar las especificaciones del cable y del puerto.
+\end{warnbox}
+
+\subsection{Thunderbolt: la extensión premium del USB-C}
+\label{sec:thunderbolt}
+
+Thunderbolt es una tecnología desarrollada por \textbf{Intel y Apple} que utiliza el \textbf{mismo conector USB-C} pero ofrece prestaciones superiores.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries}l c c X}
+\toprule
+\textbf{Versión} & \textbf{Velocidad} & \textbf{Vídeo} & \textbf{Características} \\
+\midrule
+Thunderbolt 3 & 40 Gbps & 2$\times$4K a 60Hz & Compatible con USB-C. Carga hasta 100~W. \\
+Thunderbolt 4 & 40 Gbps & 2$\times$4K a 60Hz & Misma velocidad, pero \textbf{requisitos mínimos más exigentes} (certificación obligatoria). Soporte para eGPU y daisy-chain de hasta 6 dispositivos. \\
+Thunderbolt 5 & 80/120 Gbps & 3$\times$4K a 144Hz & Lanzado en 2024. Usa PAM-3 para alcanzar 120~Gbps en modo asimétrico (útil para vídeo). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Un puerto Thunderbolt se identifica por el \textbf{símbolo del rayo (\Lightning)} junto al conector USB-C.
+
+\textbf{Aplicaciones de Thunderbolt:}
+\begin{itemize}[nosep]
+  \item Conexión de \textbf{eGPU} (tarjetas gráficas externas) para portátiles.
+  \item \textbf{Docking stations:} un solo cable USB-C conecta el portátil a monitores, red, periféricos y carga.
+  \item Transferencia ultrarrápida a \textbf{almacenamiento externo} (RAID, NVMe externo).
+  \item Conexión en \textbf{daisy-chain} de múltiples monitores y dispositivos.
+\end{itemize}
+
+
+% ══════════════════════════════════════════════════════════════════
+\section{Conectores de vídeo: HDMI y DisplayPort}
+\label{sec:video}
+% ══════════════════════════════════════════════════════════════════
+
+Los dos estándares de vídeo que se utilizan actualmente son \textbf{HDMI} y \textbf{DisplayPort}. Ambos transmiten audio y vídeo digital por un solo cable.
+
+\subsection{HDMI (High-Definition Multimedia Interface)}
+
+Introducido en 2003, HDMI se diseñó para unificar audio y vídeo en un solo cable, sustituyendo al euroconector, VGA y los cables RCA. Es el estándar dominante en \textbf{electrónica de consumo}: televisores, consolas, reproductores Blu-ray, barras de sonido, proyectores\ldots
+
+\subsubsection{Tipos de conectores HDMI}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\textwidth]{ConectorHDMI}
+  \caption{Tipos de conectores HDMI: Tipo~A (estándar), Mini-HDMI (Tipo~C) y Micro-HDMI (Tipo~D).}
+  \label{fig:hdmi_conectores}
+\end{figure}
+
+\begin{itemize}[nosep]
+  \item \textbf{HDMI Tipo~A (estándar):} 19 pines. El más común en TVs, monitores y tarjetas gráficas.
+  \item \textbf{HDMI Mini (Tipo~C):} 19 pines, más pequeño. Usado en cámaras y algunas tablets.
+  \item \textbf{HDMI Micro (Tipo~D):} 19 pines, aún menor. Dispositivos ultracompactos (cámaras de acción, drones).
+\end{itemize}
+
+\subsubsection{Evolución de versiones HDMI}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries}l c c X}
+\toprule
+\textbf{Versión} & \textbf{Ancho de banda} & \textbf{Resolución máx.} & \textbf{Novedades principales} \\
+\midrule
+HDMI 1.4 & 10,2 Gbps & 4K a 30 Hz  & Introduce soporte básico para 4K y 3D. Canal Ethernet (HEC). \\
+HDMI 2.0 & 18 Gbps   & 4K a 60 Hz  & Soporte para HDR. Hasta 32 canales de audio. \\
+HDMI 2.1 & 48 Gbps   & \textbf{8K a 60 Hz} / 4K a 120 Hz & VRR (frecuencia variable), ALLM (modo baja latencia), eARC (audio de alta calidad). Es la \textbf{versión actual}. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{infobox}[Funciones destacadas de HDMI 2.1]
+\begin{itemize}[nosep]
+  \item \textbf{VRR (Variable Refresh Rate):} sincroniza la tasa de refresco del monitor con los fotogramas de la GPU, eliminando el \emph{tearing}. Esencial en gaming.
+  \item \textbf{ALLM (Auto Low Latency Mode):} el dispositivo fuente indica al TV que active el modo de baja latencia automáticamente.
+  \item \textbf{eARC (Enhanced Audio Return Channel):} permite enviar audio de alta calidad (Dolby Atmos, DTS:X sin compresión) desde el TV a una barra de sonido o receptor AV por el mismo cable HDMI.
+  \item \textbf{Soporte HDR:} HDR10, HDR10+, Dolby Vision, HLG. Mejoran el rango dinámico y la fidelidad de color.
+\end{itemize}
+\end{infobox}
+
+\subsection{DisplayPort}
+
+Introducido en 2006 por VESA, DisplayPort es el estándar preferido en \textbf{entornos PC}, monitores de alta gama y gaming profesional. A diferencia de HDMI (que requiere licencia), DisplayPort es un estándar libre de royalties.
+
+\subsubsection{Tipos de conectores DisplayPort}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\textwidth]{displayport}
+  \caption{Conector DisplayPort estándar (izq.) y Mini DisplayPort (der.). Nótese el clip de retención del conector estándar.}
+  \label{fig:displayport}
+\end{figure}
+
+\begin{itemize}[nosep]
+  \item \textbf{DisplayPort estándar:} conector de 20 pines con un \textbf{clip de retención} que evita desconexiones accidentales. Presente en tarjetas gráficas y monitores.
+  \item \textbf{Mini DisplayPort:} versión compacta. Fue popular en portátiles Apple y Surface de Microsoft. Hoy menos frecuente (desplazado por USB-C).
+\end{itemize}
+
+\subsubsection{Evolución de versiones DisplayPort}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries}l c c X}
+\toprule
+\textbf{Versión} & \textbf{Ancho de banda} & \textbf{Resolución máx.} & \textbf{Novedades} \\
+\midrule
+DP 1.2 & 21,6 Gbps  & 4K a 60 Hz & Introduce MST (Multi-Stream Transport). \\
+DP 1.4 & 32,4 Gbps  & 8K a 60 Hz (con DSC) & Soporte HDR10, DSC (compresión visual sin pérdida perceptible). \\
+DP 2.0 & 77,4 Gbps  & 16K (con DSC) & Enorme salto de ancho de banda. \\
+DP 2.1 & 77,4 Gbps  & 4K a 240 Hz & Refinamiento del 2.0, mejor gestión de cables y compatibilidad. Es la \textbf{versión actual}. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{keybox}[Ventaja exclusiva de DisplayPort: MST (Multi-Stream Transport)]
+MST permite conectar \textbf{varios monitores en cadena} (\emph{daisy-chain}) usando un solo puerto DisplayPort del PC. El primer monitor se conecta al PC, y de ese monitor sale otro cable DP al segundo monitor, y así sucesivamente. Esto reduce el número de cables y puertos necesarios en la tarjeta gráfica. HDMI \textbf{no soporta} esta función.
+\end{keybox}
+
+\subsection{HDMI vs DisplayPort: ¿cuándo usar cada uno?}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{l X X}
+\toprule
+\textbf{Criterio} & \textbf{HDMI} & \textbf{DisplayPort} \\
+\midrule
+Uso principal & TV, consolas, home cinema & Monitores de PC, gaming en PC, workstations \\
+Audio de retorno & Sí (ARC/eARC) & No \\
+Multi-monitor (daisy-chain) & No & Sí (MST) \\
+Adaptadores & DP$\to$HDMI fácil (pasivo) & HDMI$\to$DP difícil (activo, costoso) \\
+Conector reversible & No & No (pero USB-C con DP Alt Mode sí) \\
+Licencia & Sí (de pago para fabricantes) & Libre de royalties \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+
+% ══════════════════════════════════════════════════════════════════
+\section{Conectores de audio: el puerto Jack}
+\label{sec:audio}
+% ══════════════════════════════════════════════════════════════════
+
+Aunque las conexiones inalámbricas (Bluetooth) y digitales (USB-C) ganan terreno, el \textbf{Jack de 3,5~mm} sigue siendo el conector de audio analógico estándar en PCs, portátiles, equipos de sonido y auriculares con cable.
+
+\subsection{Tamaños de conectores Jack}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.55\textwidth]{ConectorJack}
+  \caption{Comparativa de tamaños de conectores Jack: 6,35~mm (estándar), 3,5~mm (mini-jack) y 2,5~mm (sub-mini).}
+  \label{fig:jack_tamanos}
+\end{figure}
+
+\begin{itemize}[nosep]
+  \item \textbf{6,35~mm (Jack estándar):} instrumentos musicales, amplificadores, auriculares profesionales.
+  \item \textbf{3,5~mm (Mini-Jack):} el más habitual. Ordenadores, smartphones (los que aún lo conservan), auriculares de consumo.
+  \item \textbf{2,5~mm (Sub-mini-Jack):} muy raro hoy en día. Se usaba en teléfonos antiguos.
+\end{itemize}
+
+\subsection{TRS vs TRRS}
+Los anillos aislantes del conector dividen la clavija en zonas, cada una con una señal:
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{jackmicro}
+  \caption{Diferencia entre TRS (3 contactos, solo audio) y TRRS (4 contactos, audio + micrófono).}
+  \label{fig:trs_trrs}
+\end{figure}
+
+\begin{itemize}[nosep]
+  \item \textbf{TRS (Tip--Ring--Sleeve):} 3 contactos. Transporta audio estéreo (canal izquierdo + canal derecho + masa). Típico de auriculares sin micrófono.
+  \item \textbf{TRRS (Tip--Ring--Ring--Sleeve):} 4 contactos. Añade un canal para el \textbf{micrófono}. Es el que llevan los auriculares con micrófono integrado (manos libres). Estándar en smartphones y portátiles con un único puerto combo.
+\end{itemize}
+
+\subsection{Códigos de colores en la placa base}
+Los puertos Jack de la tarjeta de sonido integrada se identifican por colores:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{>{\bfseries}l l l}
+\toprule
+\textbf{Color} & \textbf{Función} & \textbf{Tipo de señal} \\
+\midrule
+\textcolor{green!70!black}{Verde}   & Salida de altavoces / auriculares (frontal) & Salida estéreo \\
+\textcolor{pink}{Rosa}              & Entrada de micrófono                       & Entrada mono \\
+\textcolor{blue}{Azul}              & Entrada de línea (Line In)                 & Entrada estéreo \\
+\textcolor{orange}{Naranja}         & Altavoz central / subwoofer                & Salida (5.1/7.1) \\
+Negro                               & Altavoces traseros                         & Salida (5.1/7.1) \\
+\textcolor{gray}{Gris}              & Altavoces laterales                        & Salida (7.1) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{MINIJACK}
+  \caption{Puertos Mini-Jack en el panel trasero de una placa base, con el código de colores.}
+  \label{fig:jack_colores}
+\end{figure}
+
+
+% ══════════════════════════════════════════════════════════════════
+\section{Conectores de red}
+\label{sec:red}
+% ══════════════════════════════════════════════════════════════════
+
+\subsection{RJ-45 (Ethernet)}
+
+El conector \textbf{RJ-45 (8P8C)} es el estándar para redes cableadas Ethernet. Lo encontramos en tarjetas de red de PCs, routers, switches y rosetas de pared.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{ConectorRJ45}
+  \caption{Conector RJ-45 (8P8C) con sus 8 contactos y clip de retención.}
+  \label{fig:rj45}
+\end{figure}
+
+\subsubsection{Características del puerto RJ-45}
+\begin{itemize}[nosep]
+  \item 8 pines / 8 conductores (8P8C).
+  \item LEDs indicadores: \textbf{luz fija} = enlace establecido; \textbf{luz parpadeante} = tráfico de datos.
+  \item Clip de retención para evitar desconexiones.
+\end{itemize}
+
+\subsubsection{Categorías de cable Ethernet}
+
+La \textbf{categoría del cable} determina la velocidad máxima y la frecuencia soportada. Un error frecuente es asumir que ``cualquier cable de red vale''; usar una categoría inadecuada limita el rendimiento de toda la red.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries}l c c X}
+\toprule
+\textbf{Categoría} & \textbf{Frecuencia} & \textbf{Velocidad máx.} & \textbf{Uso recomendado} \\
+\midrule
+Cat 5e & 100 MHz  & 1 Gbps   & Redes domésticas básicas. Mínimo aceptable hoy. \\
+Cat 6  & 250 MHz  & 1 Gbps (10 Gbps hasta 55 m)  & Redes domésticas y oficinas. \textbf{Recomendado como estándar.} \\
+Cat 6a & 500 MHz  & 10 Gbps (hasta 100 m) & Redes profesionales, edición de vídeo en red, servidores. \\
+Cat 7  & 600 MHz  & 10 Gbps  & Data centers. Cable apantallado (STP). Conector propio (GG45/TERA), aunque se crimpa con RJ-45 compatible. \\
+Cat 8  & 2000 MHz & 25/40 Gbps & Data centers de alta densidad. Distancia corta (30 m). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Tipos de cable según cruce}
+\begin{itemize}[nosep]
+  \item \textbf{Cable directo (straight-through):} conecta dispositivos \emph{diferentes} (PC $\leftrightarrow$ switch, PC $\leftrightarrow$ router). Es el 99\% de los cables que se usan.
+  \item \textbf{Cable cruzado (crossover):} conecta dispositivos \emph{iguales} (PC $\leftrightarrow$ PC, switch $\leftrightarrow$ switch). Hoy en día casi innecesario porque los dispositivos modernos incorporan \textbf{Auto-MDI/MDI-X}, que detecta y adapta la configuración automáticamente.
+\end{itemize}
+
+\subsubsection{Estándares de cableado: T568A y T568B}
+\label{sec:t568}
+
+Al crimpar un cable Ethernet, cada uno de los 8 hilos del cable debe colocarse en una posición concreta del conector RJ-45. Existen dos estándares de asignación de colores:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{c >{\bfseries}l >{\bfseries}l}
+\toprule
+\textbf{Pin} & \textbf{T568A} & \textbf{T568B} \\
+\midrule
+1 & \textcolor{green!70!black}{Blanco/Verde}   & \textcolor{orange}{Blanco/Naranja} \\
+2 & \textcolor{green!70!black}{Verde}           & \textcolor{orange}{Naranja} \\
+3 & \textcolor{orange}{Blanco/Naranja}          & \textcolor{green!70!black}{Blanco/Verde} \\
+4 & \textcolor{blue}{Azul}                      & \textcolor{blue}{Azul} \\
+5 & \textcolor{blue}{Blanco/Azul}               & \textcolor{blue}{Blanco/Azul} \\
+6 & \textcolor{orange}{Naranja}                  & \textcolor{green!70!black}{Verde} \\
+7 & \textcolor{brown}{Blanco/Marrón}            & \textcolor{brown}{Blanco/Marrón} \\
+8 & \textcolor{brown}{Marrón}                   & \textcolor{brown}{Marrón} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{itemize}[nosep]
+  \item \textbf{Cable directo:} ambos extremos con el \emph{mismo} estándar (T568B--T568B es lo más habitual en España).
+  \item \textbf{Cable cruzado:} un extremo T568A y el otro T568B.
+\end{itemize}
+
+\subsection{Conectores de fibra óptica}
+
+La fibra óptica transmite datos mediante \textbf{pulsos de luz} a través de hilos de vidrio o plástico. Ofrece velocidades muy superiores al cobre y es inmune a interferencias electromagnéticas. Aunque no es habitual encontrarla dentro de un PC doméstico, sí aparece en:
+\begin{itemize}[nosep]
+  \item La conexión FTTH (Fiber To The Home) que llega al router del hogar.
+  \item Servidores, centros de datos y redes troncales.
+  \item Tarjetas de red de fibra en equipos profesionales.
+\end{itemize}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\textwidth]{fibra}
+  \caption{Conectores de fibra óptica más comunes: ST, SC, LC y FC.}
+  \label{fig:fibra}
+\end{figure}
+
+\textbf{Conectores más comunes:}
+\begin{itemize}[nosep]
+  \item \textbf{LC (Lucent Connector):} pequeño (férula de 1,25~mm), de alta densidad. El más usado actualmente en centros de datos.
+  \item \textbf{SC (Subscriber Connector):} férula de 2,5~mm, conexión por broche (push-pull). Muy utilizado en instalaciones FTTH.
+  \item \textbf{ST (Straight Tip):} férula de 2,5~mm, conexión por bayoneta. Frecuente en redes de área local antiguas, en desuso.
+\end{itemize}
+
+\subsection{RJ-11 (telefonía)}
+
+El conector \textbf{RJ-11 (6P2C/6P4C)} se utiliza para líneas telefónicas analógicas. Es más pequeño que el RJ-45 (6 posiciones frente a 8). Aunque la telefonía fija convencional está en retroceso, aún se encuentra en routers con puerto de teléfono y centralitas.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{rj45vsrj11}
+  \caption{Comparación de tamaño entre un conector RJ-45 (8 posiciones) y un RJ-11 (6 posiciones).}
+  \label{fig:rj45_vs_rj11}
+\end{figure}
+
+\begin{warnbox}[No confundir RJ-11 y RJ-45]
+Ambos conectores son transparentes y con clip, pero el RJ-11 es más \textbf{estrecho} (6 posiciones) que el RJ-45 (8 posiciones). Un conector RJ-11 \textbf{puede insertarse físicamente} en un puerto RJ-45, pero \textbf{no debe hacerse}: puede dañar los contactos del puerto RJ-45.
+\end{warnbox}
+
+
+% ══════════════════════════════════════════════════════════════════
+\section{Conectores internos de datos: SATA y NVMe (M.2)}
+\label{sec:disco}
+% ══════════════════════════════════════════════════════════════════
+
+\subsection{SATA III}
+
+SATA (Serial ATA) es el estándar para conectar dispositivos de almacenamiento (HDD, SSD de 2,5'', unidades ópticas) a la placa base.
+
+\begin{itemize}[nosep]
+  \item \textbf{Conector de datos:} 7 pines, forma característica de ``I'' o ``L''. Cable delgado y flexible.
+  \item \textbf{Conector de alimentación:} 15 pines, forma de ``L'' más ancha. Proporciona 3,3~V, 5~V y 12~V.
+  \item \textbf{Velocidad máxima (SATA III):} 6 Gbps $\approx$ \textbf{600 MB/s} de tasa de transferencia real.
+\end{itemize}
+
+SATA~III es suficiente para discos duros mecánicos (HDD), que raramente superan los 200~MB/s. Sin embargo, los SSD SATA están \textbf{limitados por la interfaz}: un SSD SATA bueno lee a $\sim$550~MB/s, muy cerca del máximo teórico. Para superar esta barrera existe NVMe.
+
+\subsection{NVMe sobre M.2}
+
+\textbf{NVMe (Non-Volatile Memory Express)} es un protocolo de comunicación diseñado específicamente para SSD, que se comunica directamente con el procesador a través del bus \textbf{PCIe} (PCI Express), sin pasar por la controladora SATA.
+
+El conector \textbf{M.2} es una ranura en la placa base donde se inserta directamente el SSD (sin cables). Es compacto y disponible en varios tamaños:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{>{\bfseries}l l l}
+\toprule
+\textbf{Formato} & \textbf{Dimensiones} & \textbf{Uso} \\
+\midrule
+M.2 2230 & 22 $\times$ 30 mm & Portátiles ultradelgados, consolas (Steam Deck, PS5). \\
+M.2 2242 & 22 $\times$ 42 mm & Algunos portátiles. \\
+M.2 2260 & 22 $\times$ 60 mm & Poco frecuente. \\
+M.2 2280 & 22 $\times$ 80 mm & \textbf{El más habitual} en placas de sobremesa y portátiles estándar. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{warnbox}[Ojo: no todo M.2 es NVMe]
+Una ranura M.2 puede funcionar con interfaz \textbf{SATA} (máx. 600~MB/s) o con interfaz \textbf{PCIe/NVMe} (miles de MB/s). El tipo de \textbf{muesca (key)} del conector lo determina:
+\begin{itemize}[nosep]
+  \item \textbf{Key B:} SATA o PCIe $\times$2.
+  \item \textbf{Key M:} PCIe $\times$4 (NVMe). Es el habitual en SSD de alto rendimiento.
+  \item \textbf{Key B+M:} compatible con ambos (generalmente SATA).
+\end{itemize}
+Antes de comprar un SSD M.2, hay que comprobar qué interfaz soporta la ranura de la placa base.
+\end{warnbox}
+
+\subsubsection{Velocidades según generación PCIe}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{>{\bfseries}l c l}
+\toprule
+\textbf{Generación PCIe} & \textbf{Velocidad máx.\ (x4)} & \textbf{Ejemplo de uso} \\
+\midrule
+PCIe Gen 3 & $\sim$3.500 MB/s  & SSD NVMe de generaciones 2018--2020. \\
+PCIe Gen 4 & $\sim$7.000 MB/s  & SSD NVMe actuales de gama media-alta. \\
+PCIe Gen 5 & $\sim$14.000 MB/s & SSD de última generación (2024+). \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{keybox}[Comparativa rápida: HDD vs SSD SATA vs SSD NVMe]
+\begin{center}
+\begin{tabular}{l c c c}
+\toprule
+ & \textbf{HDD (SATA)} & \textbf{SSD (SATA)} & \textbf{SSD (NVMe Gen~4)} \\
+\midrule
+Lectura secuencial & $\sim$150 MB/s & $\sim$550 MB/s & $\sim$7.000 MB/s \\
+Conexión & Cable SATA & Cable SATA & Ranura M.2 (sin cables) \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{keybox}
+
+
+% ══════════════════════════════════════════════════════════════════
+\section{Conectores de alimentación}
+\label{sec:alimentacion}
+% ══════════════════════════════════════════════════════════════════
+
+Los conectores de la fuente de alimentación (PSU) distribuyen la energía a todos los componentes. Es crítico conocerlos para montar un equipo correctamente.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.55\textwidth]{fuentealimentacion}
+  \caption{Fuente de alimentación ATX con sus distintos cables y conectores.}
+  \label{fig:psu}
+\end{figure}
+
+\subsection{Conectores principales (placa base)}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.45\textwidth]{CONECTORATEX24P}
+  \caption{Conector ATX de 24 pines (20+4) para alimentación principal de la placa base.}
+  \label{fig:atx24}
+\end{figure}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries}l c X}
+\toprule
+\textbf{Conector} & \textbf{Pines} & \textbf{Función} \\
+\midrule
+ATX 24 pines & 20+4 & Alimentación \textbf{principal} de la placa base. El conector de 20+4 permite compatibilidad con placas antiguas de 20 pines (se separan los 4 extra). Proporciona 3,3~V, 5~V y 12~V. \\
+EPS / ATX12V & 4+4 (8 pines) & Alimentación específica del \textbf{procesador (CPU)}. Se conecta cerca del socket. El formato 4+4 permite usar solo 4 pines en placas que no requieran los 8. Proporciona 12~V. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Conectores para tarjetas gráficas (PCIe / PEG)}
+
+Las tarjetas gráficas potentes necesitan alimentación adicional más allá de los 75~W que proporciona la ranura PCIe de la placa.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.4\textwidth]{CONECTORPEG6P}
+  \caption{Conector PEG de 6 pines para alimentación de tarjetas gráficas. El formato 6+2 añade 2 pines separables.}
+  \label{fig:peg}
+\end{figure}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries}l c c X}
+\toprule
+\textbf{Conector} & \textbf{Pines} & \textbf{Potencia} & \textbf{Notas} \\
+\midrule
+PCIe 6 pines      & 6       & 75 W   & Gráficas de gama baja/media. \\
+PCIe 6+2 pines    & 8 (6+2) & 150 W  & El más habitual. El formato ``6+2'' permite usarlo como 6 o como 8 pines según lo requiera la gráfica. \\
+\textbf{12VHPWR}  & \textbf{16}  & \textbf{hasta 600 W} & Conector \textbf{nuevo} introducido con la especificación ATX~3.0 (2022). Usado por gráficas NVIDIA serie 40xx y posteriores. Incluye 4 pines de señal que informan a la fuente de la potencia demandada. \\
+12V-2x6           & 16      & hasta 600 W & Revisión del 12VHPWR con mejoras mecánicas en el diseño del conector para evitar problemas de conexión (sobrecalentamiento si no se inserta completamente). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{warnbox}[El conector 12VHPWR debe insertarse completamente]
+Se han reportado casos de derretimiento del conector 12VHPWR cuando no se inserta a fondo. Es fundamental \textbf{verificar que el conector hace clic} y no doblar el cable en un ángulo cerrado cerca del conector. La revisión 12V-2x6 mejora este aspecto mecánico.
+\end{warnbox}
+
+\subsection{Conectores auxiliares}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries}l c X}
+\toprule
+\textbf{Conector} & \textbf{Pines} & \textbf{Función} \\
+\midrule
+SATA alimentación & 15 & Alimenta discos HDD, SSD de 2,5'' y unidades ópticas. Proporciona 3,3~V, 5~V y 12~V. Forma de ``L''. \\
+Molex 4 pines     & 4  & Conector antiguo pero aún presente en algunas fuentes. Alimenta ventiladores adicionales, tiras LED, y mediante adaptadores puede alimentar dispositivos SATA. Proporciona 5~V y 12~V. \\
+Ventilador (FAN)  & 3 o 4 & Se conecta a la placa base. 3 pines = voltaje variable. \textbf{4 pines = control PWM} (modulación por ancho de pulso), que permite a la placa ajustar la velocidad del ventilador con precisión según la temperatura. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+
+% ══════════════════════════════════════════════════════════════════
+\section{Conectores internos de la placa base: panel frontal y headers}
+\label{sec:panelfrontal}
+% ══════════════════════════════════════════════════════════════════
+
+Al montar un PC, además de conectar alimentación y datos, es imprescindible cablear los \textbf{conectores del panel frontal de la caja} y los \textbf{headers internos} de la placa base. Son los conectores que más confusión generan en un montaje real.
+
+\subsection{Conectores del panel frontal (Front Panel Header)}
+
+La caja del PC tiene botones y LEDs en su parte delantera. Los cables que salen de la caja deben conectarse al \textbf{header de panel frontal} (\texttt{F\_PANEL} o \texttt{JFP1}) de la placa base. Son conectores diminutos, generalmente de 1 o 2 pines, sin clave de orientación.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries}l c X}
+\toprule
+\textbf{Conector} & \textbf{Pines} & \textbf{Función} \\
+\midrule
+Power SW     & 2 & \textbf{Botón de encendido.} Cierra un circuito momentáneamente. No tiene polaridad (da igual la orientación). \\
+Reset SW     & 2 & \textbf{Botón de reinicio.} Funciona igual que Power SW. Sin polaridad. \\
+Power LED +/-- & 2 & LED que indica si el equipo está encendido. \textbf{Tiene polaridad:} el cable marcado con ``+'' debe ir al pin ``+'' del header. \\
+HDD LED +/--   & 2 & LED que parpadea cuando hay actividad en el disco. \textbf{Tiene polaridad.} \\
+Speaker        & 4 (se usan 2) & Pequeño altavoz interno para los pitidos de la BIOS (\emph{beep codes}). Útil para diagnóstico cuando no hay imagen. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{warnbox}[Consejo práctico: siempre consulta el manual]
+La disposición de los pines en el header del panel frontal varía según el fabricante y modelo de placa base. \textbf{Siempre consulta el diagrama del manual} de la placa (o la serigrafía impresa sobre la propia placa). Si se conecta un LED al revés simplemente no se enciende; no se daña nada. Los botones (Power SW, Reset SW) funcionan en cualquier orientación.
+\end{warnbox}
+
+\subsection{Headers internos de USB}
+
+Los puertos USB del panel frontal de la caja no están conectados directamente a la placa: necesitan cablearse a los \textbf{headers internos de USB}.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries}l c X}
+\toprule
+\textbf{Header} & \textbf{Pines} & \textbf{Descripción} \\
+\midrule
+USB 2.0 & 9 (2$\times$5 menos 1) & Header de dos filas, con un pin cegado para evitar conexión incorrecta. Cada header ofrece 2 puertos USB 2.0 frontales. Conector marcado como \texttt{USB\_2\_3} o similar. \\
+USB 3.0 & 19 (2$\times$10 menos 1) & Header más grande y ancho, de color azul, con muesca lateral de guía. Ofrece 2 puertos USB 3.0 frontales. Conector marcado como \texttt{USB3\_1\_2}. \\
+USB-C frontal & 20 & Header específico para el puerto USB-C frontal de cajas modernas. Más compacto, con clip de retención. Presente en placas de gama media-alta. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Header de audio frontal (HD Audio)}
+
+El panel frontal de la caja suele incluir un jack de auriculares y/o micrófono. Estos se conectan al header \texttt{HD\_AUDIO} (o \texttt{AAFP}) de la placa base.
+
+\begin{itemize}[nosep]
+  \item Conector de \textbf{9 pines} (2$\times$5 menos 1) con un pin cegado como guía.
+  \item Estándar actual: \textbf{HD Audio} (Intel High Definition Audio, también conocido como Azalia).
+  \item Estándar antiguo: \textbf{AC'97} (incompatible con HD Audio). Algunas cajas antiguas traen ambos conectores etiquetados.
+\end{itemize}
+
+\begin{infobox}[¿Y si el audio frontal no funciona?]
+Si tras montar el PC los puertos de audio frontales no funcionan, lo primero es comprobar que el header \texttt{HD\_AUDIO} está correctamente conectado. Si la caja solo tiene el conector AC'97, puede ser necesario cambiar la configuración en la BIOS o en el software de audio de la placa (Realtek, etc.) para activar el modo AC'97.
+\end{infobox}
+
+
+% ══════════════════════════════════════════════════════════════════
+\section{Conectividad inalámbrica}
+\label{sec:wireless}
+% ══════════════════════════════════════════════════════════════════
+
+Aunque no son ``conectores físicos'' en sentido estricto, las tecnologías inalámbricas forman parte esencial de la conectividad de un equipo moderno. Las dos principales en un PC son \textbf{Wi-Fi} y \textbf{Bluetooth}.
+
+\subsection{Wi-Fi (IEEE 802.11)}
+
+Permite la conexión a redes locales sin cables. Los equipos pueden incorporar Wi-Fi mediante un \textbf{chip integrado en la placa base}, una \textbf{tarjeta PCIe interna} con antena, o un \textbf{adaptador USB} externo.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.45\textwidth]{Wifi}
+  \caption{Adaptador Wi-Fi con antena y puerto de conexión coaxial para la antena externa.}
+  \label{fig:wifi}
+\end{figure}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries}l l c c X}
+\toprule
+\textbf{Generación} & \textbf{Estándar} & \textbf{Banda} & \textbf{Vel.\ máx.} & \textbf{Notas} \\
+\midrule
+Wi-Fi 4 & 802.11n  & 2,4 / 5 GHz & 600 Mbps & Introducción de MIMO. \\
+Wi-Fi 5 & 802.11ac & 5 GHz       & 3,5 Gbps & MU-MIMO. Aún muy extendido. \\
+Wi-Fi 6 & 802.11ax & 2,4 / 5 GHz & 9,6 Gbps & OFDMA, mejor rendimiento en entornos congestionados. \\
+Wi-Fi 6E & 802.11ax & 2,4 / 5 / \textbf{6 GHz} & 9,6 Gbps & Añade la banda de 6 GHz (menos saturada). \\
+Wi-Fi 7 & 802.11be & 2,4 / 5 / 6 GHz & $\sim$46 Gbps & MLO (uso simultáneo de varias bandas). Estándar más reciente (2024). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Bluetooth}
+
+Tecnología inalámbrica de \textbf{corto alcance} (hasta $\sim$100 m en condiciones ideales) que opera en la banda de \textbf{2,4~GHz}. Se utiliza para conectar periféricos sin cable: auriculares, ratones, teclados, mandos de juego, altavoces\ldots
+
+\begin{itemize}[nosep]
+  \item \textbf{Bluetooth 4.0+:} introdujo \textbf{BLE (Bluetooth Low Energy)}, esencial para wearables (pulseras de actividad, relojes inteligentes) y dispositivos IoT.
+  \item \textbf{Bluetooth 5.0:} duplica el alcance y cuadruplica la velocidad respecto a 4.0. Permite transmitir audio a dos dispositivos simultáneamente.
+  \item \textbf{Bluetooth 5.3/5.4:} mejoras en eficiencia energética y estabilidad de conexión.
+\end{itemize}
+
+En un PC de sobremesa, el Bluetooth suele venir \textbf{integrado con la tarjeta Wi-Fi} (tarjeta combo Wi-Fi + BT por PCIe o M.2) o puede añadirse con un \textbf{dongle USB Bluetooth}.
+
+\subsection{Otras tecnologías inalámbricas (mención breve)}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}[t]{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.7\textwidth]{MODULOZIGBEE}
+    \caption{Módulo ZigBee para redes de sensores y domótica.}
+    \label{fig:zigbee}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.7\textwidth]{Lora}
+    \caption{Módulo LoRa para comunicaciones IoT de largo alcance.}
+    \label{fig:lora}
+  \end{minipage}
+\end{figure}
+
+\begin{itemize}[nosep]
+  \item \textbf{NFC (Near Field Communication):} comunicación a menos de 10~cm. Pagos móviles, identificación.
+  \item \textbf{ZigBee (IEEE 802.15.4):} bajo consumo, baja velocidad (250~kbps), redes de sensores y domótica.
+  \item \textbf{LoRa (Long Range):} largo alcance (hasta 20~km), muy baja velocidad. IoT rural, medidores inteligentes.
+\end{itemize}
+
+
+% ══════════════════════════════════════════════════════════════════
+\section{Conectores en desuso: referencia histórica}
+\label{sec:obsoletos}
+% ══════════════════════════════════════════════════════════════════
+
+Los siguientes conectores ya no se montan en equipos nuevos, pero es útil conocerlos porque pueden aparecer en equipos antiguos que necesiten mantenimiento.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries}l l l X}
+\toprule
+\textbf{Conector/Puerto} & \textbf{Tipo} & \textbf{Uso original} & \textbf{Sustituido por} \\
+\midrule
+PS/2 (Mini-DIN 6)     & Externo & Ratón (verde) y teclado (violeta) & USB \\
+Puerto serie (COM, DE-9M) & Externo & Ratón, módem, consola de routers & USB (aunque la consola serie persiste vía adaptador USB-serie) \\
+Puerto paralelo (DB-25F)  & Externo & Impresoras, escáneres     & USB \\
+VGA (DE-15F)              & Vídeo   & Monitores CRT y primeros LCD & HDMI / DisplayPort \\
+DVI                       & Vídeo   & Monitores LCD (2000s)      & HDMI / DisplayPort \\
+FireWire (IEEE 1394)      & Externo & Cámaras DV, discos externos & USB 3.x / Thunderbolt \\
+IDE (ATA, 40 pines)       & Interno & HDD, unidades ópticas      & SATA \\
+SCSI                      & Interno & Servidores, estaciones de trabajo & SAS / NVMe \\
+Molex (datos disquetera, 34 pines) & Interno & Disqueteras & Eliminado \\
+RCA (vídeo/audio)         & Ext.    & TV, reproductores DVD      & HDMI \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{PUERTOPS2}
+    \caption{Puertos PS/2.}
+    \label{fig:ps2}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{PUERTOSERIE}
+    \caption{Puerto serie (COM).}
+    \label{fig:serie}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{PUERTOPARALELO}
+    \caption{Puerto paralelo.}
+    \label{fig:paralelo}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{VGA}
+    \caption{Conector VGA.}
+    \label{fig:vga}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{CONECTORDVI}
+    \caption{Conector DVI.}
+    \label{fig:dvi}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{ConectoresFIREWIRE}
+    \caption{Conectores FireWire.}
+    \label{fig:firewire}
+  \end{minipage}
+\end{figure}
+
+\begin{infobox}[¿Por qué conocer los conectores antiguos?]
+En un ciclo de Montaje y Mantenimiento, es habitual encontrar equipos con varios años de antigüedad. Saber identificar un puerto serie o un conector IDE permite diagnosticar y mantener estos equipos, o saber qué adaptador se necesita para hacerlos funcionar con periféricos modernos.
+\end{infobox}
+
+
+% ══════════════════════════════════════════════════════════════════
+\section{Resumen visual: conectores que debes conocer hoy}
+\label{sec:resumen}
+% ══════════════════════════════════════════════════════════════════
+
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\textwidth}{>{\bfseries}l l l X}
+\toprule
+\textbf{Conector} & \textbf{Tipo} & \textbf{Velocidad/Capacidad} & \textbf{Para qué lo usarás} \\
+\midrule
+USB-A 3.x       & Externo & 5--10 Gbps       & Periféricos, discos externos, pendrives \\
+USB-C            & Externo & Hasta 80 Gbps    & Todo: datos, vídeo, carga, audio \\
+Thunderbolt 4/5  & Externo & 40--120 Gbps     & Docking stations, eGPU, monitores \\
+HDMI 2.1         & Vídeo   & 48 Gbps          & TV, consolas, monitores \\
+DisplayPort 2.1  & Vídeo   & 77,4 Gbps        & Monitores PC, gaming, multi-monitor \\
+Jack 3,5~mm      & Audio   & Analógico         & Auriculares, altavoces, micrófono \\
+RJ-45            & Red     & 1--10 Gbps        & Red cableada Ethernet \\
+SATA III         & Interno & 600 MB/s          & HDD, SSD 2,5'' \\
+M.2 NVMe         & Interno & Hasta 14.000 MB/s & SSD de alto rendimiento \\
+ATX 24 pines     & Alim.   & ---               & Alimentación de placa base \\
+EPS 4+4          & Alim.   & ---               & Alimentación de CPU \\
+PCIe 6+2         & Alim.   & ---               & Alimentación de gráfica \\
+12VHPWR/12V-2x6  & Alim.   & ---               & Gráficas de nueva generación \\
+SATA alim. 15p   & Alim.   & ---               & Alimentación de discos y ópticas \\
+FAN 4 pines (PWM)& Alim.   & ---               & Ventiladores con control de velocidad \\
+F\_PANEL         & Interno & ---               & Botones y LEDs del panel frontal \\
+USB 3.0 header   & Interno & ---               & Puertos USB frontales de la caja \\
+HD Audio header  & Interno & ---               & Jack de audio frontal de la caja \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+
+% ══════════════════════════════════════════════════════════════════
+\newpage
+\section{Ejercicios}
+\label{sec:ejercicios}
+% ══════════════════════════════════════════════════════════════════
+
+\subsection{Preguntas de repaso}
+
+\begin{enumerate}[label=\textbf{R\arabic*.}, leftmargin=2em]
+
+\item ¿Qué diferencia hay entre el \textbf{tipo de conector} USB (forma física) y el \textbf{estándar} USB (velocidad)? Pon un ejemplo de cómo puede llevar a confusión.
+
+\item Un puerto USB-A de color azul, ¿qué velocidad teórica mínima garantiza? ¿Y si fuera de color negro?
+
+\item Explica qué es \textbf{USB Power Delivery (USB PD)} y por qué es importante en la tendencia actual hacia el cargador universal.
+
+\item ¿Qué símbolo identifica un puerto \textbf{Thunderbolt}? ¿Puede un dispositivo USB-C funcionar en un puerto Thunderbolt? ¿Y al revés?
+
+\item Indica dos diferencias clave entre \textbf{HDMI} y \textbf{DisplayPort} que harían que recomendaras uno u otro según el escenario.
+
+\item ¿Qué significan las siglas \textbf{VRR}, \textbf{ALLM} y \textbf{eARC} en el contexto de HDMI~2.1? Explica brevemente para qué sirve cada una.
+
+\item ¿Qué diferencia hay entre un conector Jack \textbf{TRS} y uno \textbf{TRRS}? ¿En qué tipo de auriculares encontrarías cada uno?
+
+\item ¿Por qué es importante elegir la \textbf{categoría de cable Ethernet} adecuada? ¿Qué categoría mínima recomendarías para una instalación nueva en una oficina?
+
+\item Explica la diferencia entre un SSD con interfaz \textbf{SATA} y uno con interfaz \textbf{NVMe}. ¿Por qué el NVMe es más rápido?
+
+\item ¿Qué es la \textbf{muesca (key)} de un conector M.2 y por qué es importante verificarla antes de comprar un SSD?
+
+\item ¿Cuántos vatios puede suministrar la ranura PCIe de la placa base a una tarjeta gráfica sin alimentación adicional? ¿Por qué las gráficas potentes necesitan conectores PCIe adicionales?
+
+\item ¿Qué problema específico se ha reportado con el conector \textbf{12VHPWR} y qué precaución debe tomarse al instalarlo?
+
+\item Al montar un PC, ¿qué conectores del panel frontal \textbf{tienen polaridad} y cuáles no? ¿Qué ocurre si conectas un LED al revés?
+
+\item ¿Qué diferencia hay entre el header de \textbf{USB 2.0 interno} (9 pines) y el de \textbf{USB 3.0 interno} (19 pines)? ¿Son intercambiables?
+
+\end{enumerate}
+
+\subsection{Casos prácticos}
+
+\begin{enumerate}[label=\textbf{CP\arabic*.}, leftmargin=2em]
+
+\item \textbf{Montaje de un equipo gaming:} Un cliente quiere un PC para jugar a 4K a 120~Hz. Está dudando entre un monitor HDMI y uno DisplayPort. También quiere un SSD que alcance al menos 5.000~MB/s de lectura.
+\begin{enumerate}[label=\alph*)]
+  \item ¿Qué versión mínima de HDMI necesitaría para 4K a 120~Hz?
+  \item ¿Y de DisplayPort?
+  \item ¿Qué tipo de SSD y conexión necesita para alcanzar esa velocidad?
+  \item La tarjeta gráfica que ha elegido requiere un conector de 16 pines. ¿De qué conector se trata? ¿Qué fuente de alimentación necesita?
+\end{enumerate}
+
+\item \textbf{Estación de trabajo con docking station:} Una diseñadora gráfica quiere conectar su portátil a dos monitores 4K, un disco externo rápido, un teclado, un ratón y cargar el portátil, todo con \textbf{un solo cable}.
+\begin{enumerate}[label=\alph*)]
+  \item ¿Qué tecnología de conexión le recomendarías?
+  \item ¿Qué versión mínima necesita para soportar dos monitores 4K a 60~Hz?
+  \item ¿Qué tipo de docking station necesita?
+\end{enumerate}
+
+\item \textbf{Diagnóstico de red lenta:} En una pequeña empresa, la red Ethernet va lenta. El administrador descubre que están usando cables Cat~5e y un switch Gigabit, pero los usuarios que hacen edición de vídeo necesitan más ancho de banda.
+\begin{enumerate}[label=\alph*)]
+  \item ¿Es el cable Cat~5e capaz de soportar Gigabit Ethernet?
+  \item Si necesitan 10 Gigabit Ethernet, ¿qué categoría mínima de cable deben instalar?
+  \item ¿Necesitarían cambiar también el switch? ¿Por qué?
+\end{enumerate}
+
+\item \textbf{Compatibilidad de conectores:} Un alumno está montando un PC y se encuentra con las siguientes situaciones. Indica si es posible o no, y qué se necesitaría:
+\begin{enumerate}[label=\alph*)]
+  \item Conectar un monitor DisplayPort a una salida HDMI de la tarjeta gráfica.
+  \item Conectar un SSD M.2 con key~M a una ranura M.2 con key~B.
+  \item Usar un cable USB-C para cargar un portátil que solo tiene puerto USB-A.
+  \item Conectar una fuente con conector PCIe de 6+2 pines a una gráfica que pide 6 pines.
+  \item Conectar unos auriculares con conector TRRS a una placa base que tiene puertos separados para micrófono (rosa) y auriculares (verde).
+\end{enumerate}
+
+\item \textbf{Montaje del panel frontal:} Has montado un PC nuevo pero al pulsar el botón de encendido no ocurre nada. El ventilador de la CPU no gira y no hay imagen.
+\begin{enumerate}[label=\alph*)]
+  \item ¿Cuál es la primera conexión que comprobarías?
+  \item Si el PC enciende pero el LED de encendido no se ilumina, ¿a qué puede deberse? ¿Se ha dañado algo?
+  \item Los puertos USB frontales de la caja no funcionan. ¿Qué header interno debes comprobar?
+  \item El audio frontal (jack de auriculares) no produce sonido. Enumera dos posibles causas.
+\end{enumerate}
+
+\end{enumerate}
+
+\subsection{Práctica de taller: crimpado de un cable Ethernet RJ-45}
+\label{sec:practica_crimpado}
+
+\begin{keybox}[Objetivo de la práctica]
+Fabricar un \textbf{cable de red Ethernet directo} (patch cord) con conectores RJ-45, siguiendo el estándar \textbf{T568B} en ambos extremos, y verificar su correcto funcionamiento.
+\end{keybox}
+
+\textbf{Material necesario:}
+\begin{multicols}{2}
+\begin{itemize}[nosep]
+  \item Cable UTP Cat~6 (1--2 metros)
+  \item 2 conectores RJ-45
+  \item Crimpadora para RJ-45
+  \item Pelacables o tijeras
+  \item Tester (comprobador) de cables de red
+\end{itemize}
+\end{multicols}
+
+\textbf{Procedimiento:}
+\begin{enumerate}
+  \item \textbf{Pelar la cubierta:} retirar aproximadamente 2--3~cm de la cubierta exterior del cable, dejando expuestos los 4 pares trenzados. Cuidado de no dañar el aislamiento interior de los hilos.
+  \item \textbf{Destrenzar y ordenar:} separar los 8 hilos y ordenarlos \textbf{de izquierda a derecha} según el estándar T568B (ver sección~\ref{sec:t568}):
+  \begin{center}
+    \textcolor{orange}{Bl/Naranja} -- \textcolor{orange}{Naranja} -- \textcolor{green!70!black}{Bl/Verde} -- \textcolor{blue}{Azul} -- \textcolor{blue}{Bl/Azul} -- \textcolor{green!70!black}{Verde} -- \textcolor{brown}{Bl/Marrón} -- \textcolor{brown}{Marrón}
+  \end{center}
+  \item \textbf{Cortar los hilos:} alinear las puntas y cortarlas rectas a unos 12--14~mm de la cubierta. Los hilos deben quedar paralelos y a la misma altura.
+  \item \textbf{Insertar en el conector:} introducir los hilos en el conector RJ-45 con el clip hacia abajo, asegurándose de que:
+  \begin{itemize}[nosep]
+    \item Cada hilo llega hasta el final del conector (se ven las puntas de cobre al mirarlo de frente).
+    \item La cubierta exterior del cable entra al menos 5~mm dentro del conector (para que la grapa de tensión la sujete).
+  \end{itemize}
+  \item \textbf{Crimpar:} insertar el conector en la crimpadora y presionar firmemente. Esto empuja las cuchillas metálicas del conector a través del aislamiento de cada hilo, haciendo contacto eléctrico.
+  \item \textbf{Repetir} en el otro extremo del cable con el mismo orden T568B.
+  \item \textbf{Verificar con el tester:} conectar ambos extremos al comprobador de cables. Deben encenderse los 8 LEDs en orden (1--8). Si alguno no enciende o se enciende fuera de orden, hay un hilo mal colocado o sin contacto.
+\end{enumerate}
+
+\textbf{Criterios de evaluación:}
+\begin{itemize}[nosep]
+  \item[$\square$] Los 8 hilos hacen contacto correctamente (tester OK).
+  \item[$\square$] El orden de colores es T568B en ambos extremos.
+  \item[$\square$] La cubierta exterior queda sujeta por la grapa del conector.
+  \item[$\square$] El cable está limpio, sin hilos expuestos fuera del conector.
+\end{itemize}
+
+\subsection{Ejercicio de investigación}
+
+\begin{enumerate}[label=\textbf{I\arabic*.}, leftmargin=2em]
+
+\item Busca en la web las especificaciones de una placa base actual de gama media (por ejemplo, una ASUS, MSI o Gigabyte con chipset reciente). Lista todos los conectores y puertos que incluye en su panel trasero y en la placa, y clasifícalos según las categorías estudiadas en este tema.
+
+\item La Unión Europea ha establecido el \textbf{USB-C como cargador universal obligatorio} desde 2024. Investiga: ¿a qué dispositivos afecta esta normativa? ¿Afecta a los portátiles? ¿Desde cuándo?
+
+\item Compara las especificaciones de un \textbf{SSD NVMe PCIe Gen~4} y un \textbf{SSD NVMe PCIe Gen~5} reales (busca modelos concretos). ¿Merece la pena el salto generacional a día de hoy en precio/rendimiento?
+
+\end{enumerate}
+
+\subsection{Ejercicio de identificación}
+
+\begin{enumerate}[label=\textbf{ID\arabic*.}, leftmargin=2em]
+
+\item Tu profesor te entregará (o mostrará fotos de) varios cables y conectores. Para cada uno, debes identificar:
+\begin{enumerate}[label=\alph*)]
+  \item Nombre del conector.
+  \item Si es macho o hembra.
+  \item Tipo de señal que transporta (datos, vídeo, audio, alimentación).
+  \item Estándar/versión si es posible determinarlo visualmente.
+  \item Si está en uso actualmente o es obsoleto.
+\end{enumerate}
+
+\item Dibuja un esquema de la parte trasera de una torre de PC moderna y señala dónde esperarías encontrar cada uno de estos puertos: USB-A 3.0, USB-C, HDMI, DisplayPort, RJ-45, Jack 3,5~mm (verde, rosa, azul).
+
+\end{enumerate}
+
+% ══════════════════════════════════════════════════════════════════
+\vfill
+\begin{center}
+\small\textcolor{gray}{---~Fin del resumen del Tema~5~---}
+\end{center}
+
+\end{document}
