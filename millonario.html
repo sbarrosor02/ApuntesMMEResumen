@@ -205,139 +205,134 @@ const LETTERS = ['A','B','C','D'];
 const QUESTIONS = [
   // ─ Q1 Muy fácil ─
   {
-    // FIX: eliminado "teclados y ratones" del enunciado; ahora el alumno debe reconocer el conector por la imagen
     pregunta:"¿Cuál es la función del conector mostrado en la imagen? Fíjate en su forma circular y en que aparece en dos colores distintos según el dispositivo que conecta.",
     imagen:"images/PS2.jpg",
     opciones:["USB tipo A — conexión de periféricos modernos","PS/2 — entrada de teclado o ratón","Jack 3,5 mm — audio analógico","RJ-11 — línea telefónica"],
-    correcta:1
+    correcta:1,
+    pista:"Tu amigo dice: '¡PS/2, la B! El redondito morado ese que nunca encajaba bien… ¡lo recuerdo perfectamente!'"
   },
   // ─ Q2 Fácil ─
   {
-    // FIX: eliminado "vídeo analógico" del enunciado
     pregunta:"¿Cómo se denomina el conector de 15 pines mostrado en la imagen?",
     imagen:"images/vga.jpg",
     opciones:["DVI-I (conectores de 24+5 pines)","VGA — D-Sub de 15 pines","DisplayPort 1.4 (conector plano)","S-Video (conector de 4 pines)"],
-    correcta:1
+    correcta:1,
+    pista:"Tu amigo responde: 'La B sin dudar. VGA, el trapecio azul con 15 patitas. Lo vendo en el rastro cada dos por tres.'"
   },
   // ─ Q3 Fácil ─
   {
-    // FIX: eliminado "se usa en redes Ethernet" del enunciado; ahora se pide identificar el conector grande
     pregunta:"La imagen muestra dos conectores de apariencia similar pero diferente tamaño. ¿Cuántos pines tiene el conector MÁS GRANDE y cómo se llama?",
     imagen:"images/rj45vsrj11.jpg",
     opciones:["6 pines — RJ-11","8 pines — RJ-45","9 pines — DE-9 (puerto serie)","4 pines — RJ-9"],
-    correcta:1
+    correcta:1,
+    pista:"Tu amigo lo tiene claro: 'El RJ-45 es el gordo, la B, tiene 8 pines. El RJ-11 es el del teléfono, más estrecho. Básico.'"
   },
   // ─ Q4 Fácil ─
   {
-    // FIX: eliminado "reversible" y "modernos" como pistas; la imagen debe hablar por sí sola
     pregunta:"La imagen muestra varios tipos de conectores USB. ¿Cuál de ellos ha sido adoptado como estándar universal en la mayoría de dispositivos portátiles actuales?",
     imagen:"images/usbs.png",
     opciones:["USB tipo A (el rectangular clásico)","USB tipo B (el cuadrado de impresoras)","Micro-USB tipo B","USB tipo C"],
-    correcta:3
+    correcta:3,
+    pista:"Tu amigo dice: '¡USB-C, la D! El ovalo ese que por fin se conecta del revés. Ya era hora, oye.'"
   },
   // ─ Q5 Media · SALVAVIDAS ─
   {
-    // FIX: el enunciado anterior decía implícitamente "audio y vídeo"; ahora pregunta cuántos tipos de señal
     pregunta:"El conector de la imagen es el más extendido para enlazar fuentes de vídeo con pantallas. ¿Cuántos tipos de señal distintos puede transportar simultáneamente en un único cable?",
     imagen:"images/hdmi.jpg",
     opciones:["Solo uno — únicamente vídeo digital","Dos — vídeo digital más control remoto CEC","Dos — audio digital y vídeo digital","Tres — audio, vídeo y alimentación eléctrica"],
-    correcta:2
+    correcta:2,
+    pista:"Tu amigo responde: 'El HDMI lleva audio y vídeo junto, la C. Lo sé porque monté mi tele yo solo, sin manual.'"
   },
   // ─ Q6 Media ─
   {
-    // FIX: eliminado "impresoras de agujas" del enunciado
     pregunta:"¿Cómo se denomina el conector de 25 pines mostrado en la imagen?",
     imagen:"images/paralelo.jpg",
     opciones:["Puerto serie DB-25 (RS-232 ampliado)","Puerto paralelo LPT (IEEE 1284)","Conector SCSI-1 para dispositivos externos","Conector DA-15 para joystick analógico"],
-    correcta:1
+    correcta:1,
+    pista:"Tu amigo técnico dice: 'Eso es el puerto paralelo, la B, 25 pines. Tenía una impresora de esas y era un dolor conectarla.'"
   },
   // ─ Q7 Media ─
   {
-    // FIX: ELIMINADA la explicación "TRRS: Tip·Ring·Ring·Sleeve" que era la respuesta completa
     pregunta:"Observa el número de bandas aislantes (anillos negros) del conector Jack de la imagen. ¿Para qué tipo de dispositivo indica esa configuración que está diseñado?",
     imagen:"images/jackmicro.png",
     opciones:["Altavoces estéreo pasivos (sin micrófono)","Auriculares con micrófono integrado (manos libres)","Guitarra o bajo eléctrico (jack mono)","Salida digital óptica S/PDIF"],
-    correcta:1
+    correcta:1,
+    pista:"Tu amigo dice: 'El TRRS es auriculares con micro en uno, la B. Lo uso para las videollamadas, funciona genial.'"
   },
   // ─ Q8 Media-Alta ─
   {
-    // FIX: el enunciado anterior describía MST literalmente; ahora describe el escenario y pregunta el nombre
     pregunta:"Un técnico quiere conectar 3 monitores en cadena desde una única salida de la GPU, sin ningún switch de vídeo externo. ¿Qué tecnología exclusiva de DisplayPort lo hace posible?",
     imagen:"images/displayport.png",
     opciones:["eARC — Enhanced Audio Return Channel","MST — Multi-Stream Transport","VRR — Variable Refresh Rate","DPCP — DisplayPort Content Protection"],
-    correcta:1
+    correcta:1,
+    pista:"Tu amigo (3 monitores en casa) dice: 'MST de DisplayPort, la B. Sin eso no podría tener los tres monitores en cadena.'"
   },
   // ─ Q9 Alta ─
   {
     pregunta:"Para un enlace de fibra óptica entre dos edificios separados 5 km, ¿qué tipo de fibra es el técnicamente correcto?",
     imagen:"images/fibra.png",
     opciones:["Multimodo OM4 — núcleo 50 µm (distancia máx. ~550 m)","Plástica POF — para instalaciones domésticas (&lt;50 m)","Monomodo OS2 — núcleo 9 µm (apta para kilómetros)","Coaxial RG-6 — señal de satélite/cable TV"],
-    correcta:2
+    correcta:2,
+    pista:"Tu amigo responde: 'Monomodo para larga distancia, la C. Con la multimodo llegas a 550 metros como mucho. Básico del CFGS.'"
   },
   // ─ Q10 Alta · SALVAVIDAS ─
   {
     pregunta:"¿Cuántos pines tiene el conector principal de alimentación ATX moderno que conecta la fuente de alimentación a la placa base?",
     imagen:"images/fuentealimentacion.jpg",
     opciones:["20 pines (ATX original, año 1995)","24 pines (ATX estándar actual)","8 pines (conector EPS exclusivo para CPU)","12 pines (12VHPWR para GPUs)"],
-    correcta:1
+    correcta:1,
+    pista:"Tu amigo dice: '24 pines, la B. Si no conectas eso la placa no arranca ni en broma. Lo básico del montaje.'"
   },
   // ─ Q11 Difícil ─
   {
     pregunta:"¿Qué versión de HDMI fue la primera en soportar nativamente 4K a 120 Hz, tasa de refresco variable (VRR) y canal de audio mejorado (eARC)?",
     imagen:null,
     opciones:["HDMI 1.4 (2009)","HDMI 2.0b (2016)","HDMI 2.1 (2017)","HDMI 3.0 (no existe aún)"],
-    correcta:2
+    correcta:2,
+    pista:"Tu amigo (tiene PS5) dice: 'HDMI 2.1, la C. La 2.0 se queda en 4K@60Hz. Para 4K@120Hz necesitas la 2.1, te lo juro.'"
   },
   // ─ Q12 Difícil ─
   {
-    // FIX: eliminado "ZigBee (IEEE 802.15.4)" del enunciado; el alumno debe deducir el protocolo por sus características
     pregunta:"El módulo de la imagen implementa un protocolo inalámbrico de corto alcance diseñado específicamente para redes de sensores. ¿Cuál de estas afirmaciones describe MEJOR su uso típico?",
     imagen:"images/zigbee.jpg",
     opciones:["Comunicaciones 5G de alta velocidad para smartphones","Redes de sensores, IoT y domótica de muy bajo consumo eléctrico","Punto de acceso Wi-Fi para streaming de vídeo 4K","Receptor GPS de alta precisión para navegación en exteriores"],
-    correcta:1
+    correcta:1,
+    pista:"Tu amigo del trabajo dice: 'ZigBee es para IoT y domótica, la B. Usamos sensores ZigBee en la fábrica para todo.'"
   },
   // ─ Q13 Muy difícil ─
   {
-    // FIX CRÍTICO: el enunciado anterior contenía la respuesta "(header de 19 pines)"
     pregunta:"¿Cuántos pines activos tiene el header USB 3.0 interno de la placa base que proporciona señal a los puertos USB del panel frontal del chasis?",
     imagen:null,
     opciones:["9 pines (es el header USB 2.0 interno)","14 pines","19 pines","24 pines (conector USB-C frontal de 20 pines)"],
-    correcta:2
+    correcta:2,
+    pista:"Tu amigo técnico responde: '19 pines es el USB 3.0 header, la C. El de 9 pines es el USB 2.0. Se me han quemado algunos montándolos mal.'"
   },
   // ─ Q14 Muy difícil ─
   {
     pregunta:"Un SSD NVMe M.2 con interfaz PCIe Gen 5 x4 alcanza velocidades de lectura secuencial de aproximadamente:",
     imagen:null,
     opciones:["~3,5 GB/s (PCIe 3.0 x4)","~7 GB/s (PCIe 4.0 x4)","~14 GB/s (PCIe 5.0 x4)","~28 GB/s (PCIe 6.0 x4, en desarrollo)"],
-    correcta:2
+    correcta:2,
+    pista:"Tu amigo friki del hardware dice: '~14 GB/s para PCIe 5.0 x4, la C. La 4.0 llega a ~7 GB/s. El doble de generación en generación.'"
   },
   // ─ Q15 ¡EL MILLÓN! ─
   {
     pregunta:"🏆 ¡PREGUNTA DEL MILLÓN! En el estándar T568B, ¿qué colores ocupan los pines 1 y 2 del conector RJ-45?",
     imagen:null,
     opciones:["Blanco-Verde / Verde","Blanco-Naranja / Naranja","Blanco-Azul / Azul","Blanco-Marrón / Marrón"],
-    correcta:1
+    correcta:1,
+    pista:"Tu amigo responde: 'T568B: pines 1-2 van blanco-naranja y naranja, la B. ¡Me lo sé de memoria de cuando hice el CFGM!'"
   }
 ];
 
-// Pistas para la "Llamada a un amigo" (siempre correctas, con humor)
-const CALL_HINTS = [
-  "Tu amigo dice: '¡PS/2, la B! El redondito morado ese que nunca encajaba bien… ¡lo recuerdo perfectamente!'",
-  "Tu amigo responde: 'La B sin dudar. VGA, el trapecio azul con 15 patitas. Lo vendo en el rastro cada dos por tres.'",
-  "Tu amigo lo tiene claro: 'El RJ-45 es el gordo, la B, tiene 8 pines. El RJ-11 es el del teléfono, más estrecho. Básico.'",
-  "Tu amigo dice: '¡USB-C, la D! El ovalo ese que por fin se conecta del revés. Ya era hora, oye.'",
-  "Tu amigo responde: 'El HDMI lleva audio y vídeo junto, la C. Lo sé porque monté mi tele yo solo, sin manual.'",
-  "Tu amigo técnico dice: 'Eso es el puerto paralelo, la B, 25 pines. Tenía una impresora de esas y era un dolor conectarla.'",
-  "Tu amigo dice: 'El TRRS es auriculares con micro en uno, la B. Lo uso para las videollamadas, funciona genial.'",
-  "Tu amigo (3 monitores en casa) dice: 'MST de DisplayPort, la B. Sin eso no podría tener los tres monitores en cadena.'",
-  "Tu amigo responde: 'Monomodo para larga distancia, la C. Con la multimodo llegas a 550 metros como mucho. Básico del CFGS.'",
-  "Tu amigo dice: '24 pines, la B. Si no conectas eso la placa no arranca ni en broma. Lo básico del montaje.'",
-  "Tu amigo (tiene PS5) dice: 'HDMI 2.1, la C. La 2.0 se queda en 4K@60Hz. Para 4K@120Hz necesitas la 2.1, te lo juro.'",
-  "Tu amigo del trabajo dice: 'ZigBee es para IoT y domótica, la B. Usamos sensores ZigBee en la fábrica para todo.'",
-  "Tu amigo técnico responde: '19 pines es el USB 3.0 header, la C. El de 9 pines es el USB 2.0. Se me han quemado algunos montándolos mal.'",
-  "Tu amigo friki del hardware dice: '~14 GB/s para PCIe 5.0 x4, la C. La 4.0 llega a ~7 GB/s. El doble de generación en generación.'",
-  "Tu amigo responde: 'T568B: pines 1-2 van blanco-naranja y naranja, la B. ¡Me lo sé de memoria de cuando hice el CFGM!'",
-];
+function shuffle(arr){
+  const a = [...arr];
+  for(let i = a.length-1; i > 0; i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 // ═══════════════════════════════════════════
 //  STATE
@@ -348,11 +343,13 @@ let lifelinesUsed = {fifty:false, call:false, audience:false};
 let eliminatedOpts = [];
 let waitingReveal = false;
 let confettiId = null;
+let gameQuestions = [];
 
 // ═══════════════════════════════════════════
 //  INIT
 // ═══════════════════════════════════════════
 function startGame(){
+  gameQuestions = shuffle(QUESTIONS);
   document.getElementById('start-screen').classList.remove('active');
   document.getElementById('game-screen').classList.add('active');
   buildPrizeLadder();
@@ -365,6 +362,7 @@ function resetGame(){
   lifelinesUsed = {fifty:false, call:false, audience:false};
   eliminatedOpts = [];
   waitingReveal = false;
+  gameQuestions = shuffle(QUESTIONS);
   stopConfetti();
 
   ['ll-50','ll-call','ll-audience'].forEach(id=>{
@@ -411,13 +409,13 @@ function updateLadder(){
 //  LOAD QUESTION
 // ═══════════════════════════════════════════
 function loadQuestion(idx){
-  if(idx >= QUESTIONS.length){ showWin(); return; }
+  if(idx >= gameQuestions.length){ showWin(); return; }
   currentQ = idx;
   eliminatedOpts = [];
   waitingReveal = false;
   updateLadder();
 
-  const q = QUESTIONS[idx];
+  const q = gameQuestions[idx];
   document.getElementById('question-number').textContent = `PREGUNTA ${idx+1} DE 15`;
   document.getElementById('question-text').textContent = q.pregunta;
 
@@ -450,7 +448,7 @@ function selectAnswer(chosen){
   if(waitingReveal) return;
   waitingReveal = true;
 
-  const q = QUESTIONS[currentQ];
+  const q = gameQuestions[currentQ];
   const btns = document.querySelectorAll('.option-btn');
   btns.forEach(b=>b.disabled=true);
   btns[chosen].classList.add('selected');
@@ -481,7 +479,7 @@ function use5050(){
   if(lifelinesUsed.fifty || waitingReveal) return;
   lifelinesUsed.fifty = true;
   document.getElementById('ll-50').disabled = true;
-  const q = QUESTIONS[currentQ];
+  const q = gameQuestions[currentQ];
   const wrong = [0,1,2,3].filter(i=>i!==q.correcta);
   const remove = wrong.sort(()=>Math.random()-0.5).slice(0,2);
   remove.forEach(i=>{
@@ -495,7 +493,7 @@ function useCall(){
   if(lifelinesUsed.call || waitingReveal) return;
   lifelinesUsed.call = true;
   document.getElementById('ll-call').disabled = true;
-  const hint = CALL_HINTS[currentQ] || "Tu amigo dice: '¡Yo confío en ti! Piénsalo bien...'";
+  const hint = gameQuestions[currentQ].pista || "Tu amigo dice: '¡Yo confío en ti! Piénsalo bien...'";
   document.getElementById('modal-title').textContent = '📞 Llamada a un amigo';
   document.getElementById('modal-content').innerHTML = `<p style="font-style:italic;font-size:1.05rem;margin-bottom:0.8rem;">"${hint}"</p><p style="color:#888;font-size:0.82rem;">Tienes 30 segundos para decidir después de colgar.</p>`;
   document.getElementById('modal-overlay').classList.add('active');
@@ -505,7 +503,7 @@ function useAudience(){
   if(lifelinesUsed.audience || waitingReveal) return;
   lifelinesUsed.audience = true;
   document.getElementById('ll-audience').disabled = true;
-  const q = QUESTIONS[currentQ];
+  const q = gameQuestions[currentQ];
 
   // Fabricar votos: la correcta obtiene 60-78%
   const correctPct = Math.floor(60 + Math.random()*18);
@@ -537,6 +535,7 @@ function closeModal(){
 //  END SCREENS
 // ═══════════════════════════════════════════
 function showWin(){
+  localStorage.setItem('millonario_ganado','1');
   document.getElementById('game-screen').classList.remove('active');
   const es = document.getElementById('end-screen');
   es.classList.add('active','end-win');
@@ -557,7 +556,7 @@ function showLose(chosen, correct){
   document.getElementById('game-screen').classList.remove('active');
   const es = document.getElementById('end-screen');
   es.classList.add('active','end-lose');
-  const q = QUESTIONS[currentQ];
+  const q = gameQuestions[currentQ];
   const guar = guaranteedAmt ? fmt(guaranteedAmt) : '0 pts';
   document.getElementById('end-title').textContent = '❌ ¡Respuesta incorrecta!';
   document.getElementById('end-message').innerHTML = `

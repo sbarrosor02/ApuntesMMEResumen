@@ -139,12 +139,23 @@
   <div class="section-label">📚 Recursos del tema</div>
   <div class="resources-grid">
 
-    <div class="resource-card">
-      <div class="rc-icon">📝</div>
+    <div class="resource-card" id="card-preguntas">
+      <div class="rc-icon" id="preguntas-icon">🔒</div>
       <div class="rc-title">40 Preguntas de práctica</div>
-      <div class="rc-desc">Banco completo de 40 preguntas tipo test (con imágenes y clave de respuestas). Incluye las 15 preguntas del juego más 25 preguntas adicionales basadas en los apuntes. Puedes imprimirlo o guardarlo como PDF.</div>
-      <a href="preguntas.html" class="rc-link">Ver preguntas →</a>
+      <div class="rc-desc" id="preguntas-desc">Banco completo de 40 preguntas tipo test (con imágenes y clave de respuestas). <strong style="color:#c00;">Completa el juego del millonario para desbloquear este recurso.</strong></div>
+      <span class="rc-link" id="preguntas-link" style="opacity:0.45;cursor:not-allowed;background:#aaa;">🔒 Bloqueado</span>
     </div>
+    <script>
+      if(localStorage.getItem('millonario_ganado')==='1'){
+        document.getElementById('preguntas-icon').textContent='📝';
+        document.getElementById('preguntas-desc').textContent='Banco completo de 40 preguntas tipo test (con imágenes y clave de respuestas). Incluye las 15 preguntas del juego más 25 preguntas adicionales basadas en los apuntes. Puedes imprimirlo o guardarlo como PDF.';
+        const l=document.getElementById('preguntas-link');
+        l.textContent='Ver preguntas →';
+        l.style.opacity='';l.style.cursor='';l.style.background='';
+        l.href='preguntas.html';
+        l.className='rc-link';
+      }
+    </script>
 
     <div class="resource-card">
       <div class="rc-icon">📋</div>
